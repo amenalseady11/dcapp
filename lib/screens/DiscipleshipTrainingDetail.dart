@@ -183,7 +183,7 @@ class _MemberTraingDetailState extends State<MemberTraingDetail> {
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),

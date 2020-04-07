@@ -1,15 +1,11 @@
 import 'dart:core';
 import 'package:dcapp/classes/MeetingRoom.dart';
 import 'package:dcapp/globals.dart' as global;
-import 'package:dcapp/screens/CreateMeeting.dart';
-import 'package:dcapp/services/BranchHeadServ.dart';
-import 'package:dcapp/services/DeptHeadServ.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dcapp/classes/MeetingClass.dart' as meet;
 import 'package:dcapp/services/MeetingServ.dart';
-import 'package:dcapp/services/ZoneHeadServ.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:intl/intl.dart';
 
@@ -182,18 +178,18 @@ class _ManageMeeting extends State<ManageMeeting> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
+                GestureDetector(
+                  onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
                         child: Center(
                           child: Text(
                             'Back to List',
@@ -202,8 +198,8 @@ class _ManageMeeting extends State<ManageMeeting> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'MontSerrat'),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));

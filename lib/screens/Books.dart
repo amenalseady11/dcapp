@@ -10,7 +10,7 @@ import 'package:dcapp/globals.dart' as global;
 import 'package:dcapp/classes/BooksClass.dart' as bookClass;
 import 'package:intl/intl.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
-
+import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
@@ -28,9 +28,80 @@ class _BookPageState extends State<BookPage> {
   String pathPDF = "";
   String downloadProgress="";
 
+  Future<bool> loader(String str) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+              title: ScalingText(str ),
+            ));
+  }
+  Future<bool> dialog(str) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+            title: Text('Message'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  str,
+                  style: TextStyle(fontSize: 14, color: Colors.blue.shade900),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                GestureDetector(
+                   onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
+                        child: Center(
+                          child: Text(
+                            'Back to List',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'MontSerrat'),
+                          ),
+                        )),
+                  ),
+                ),
+              ],
+            )));
+  }
+  
+   Future<bool> checkconnectivity() async {
+    try {
+      final result = await InternetAddress.lookup("google.com");
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }else{
+         return false;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
   @override
-  void initState() {
+  void initState(){
     super.initState();
+    new Future.delayed(Duration.zero, () async {
+      bool res = await checkconnectivity();
+      if (!res) {
+        dialog("Internet Required, Check your Network Connection");
+
+        return;
+      }
     setState(() {
       new Future.delayed(Duration.zero, () {
         loader(' Loading Book Store...');
@@ -48,6 +119,7 @@ class _BookPageState extends State<BookPage> {
           });
         });
       });
+    });
     });
   }
 
@@ -144,61 +216,13 @@ class _BookPageState extends State<BookPage> {
     }
   }
 
-  Future<bool> loader(String str) {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => AlertDialog(
-              title: ScalingText(str ),
-            ));
-  }
+  
 
   bookitems() {
     return Column(children: <Widget>[]);
   }
 
-  Future<bool> dialog(str) {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => AlertDialog(
-            title: Text('Message'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  str,
-                  style: TextStyle(fontSize: 14, color: Colors.blue.shade900),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
-                        child: Center(
-                          child: Text(
-                            'Back to List',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'MontSerrat'),
-                          ),
-                        ),
-                      )),
-                ),
-              ],
-            )));
-  }
+  
 
   String getDate(DateTime date) {
     var formatdateposted = new DateFormat('yyyy-MMM-dd');
@@ -445,7 +469,12 @@ class _BookPageState extends State<BookPage> {
                       Icons.shopping_cart,
                       color: Colors.white,
                     ),
-                    onPressed: () {
+                    onPressed: ()async {
+                       bool res = await checkconnectivity();
+                        if (!res) {
+                         dialog("Internet Required, Check your Network Connection");
+                          return;
+                           }
                       global.bookId = filteredBooks[cardIndex].bookId;
                       global.bookTitle = filteredBooks[cardIndex].title;
 

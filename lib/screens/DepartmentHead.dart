@@ -120,19 +120,19 @@ class _DepartmentHead extends State<DepartmentHead>{
 
         ),),
         SizedBox(height: 10.0,),
-        Container(
-                    height: 40.0,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blue.shade900,
-                        color: Colors.blue.shade900,
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: (){
-                             Navigator.pop(context);
-                             Navigator.pop(context);
-                             
-                          },
+        GestureDetector(
+          onTap: (){
+                               Navigator.pop(context);
+                               Navigator.pop(context);
+                               
+                            },
+          child: Container(
+                      height: 40.0,
+                      child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.blue.shade900,
+                          color: Colors.blue.shade900,
+                          elevation: 7.0,
                           child: Center(
                             child: Text(
                               'Back to List',
@@ -142,11 +142,11 @@ class _DepartmentHead extends State<DepartmentHead>{
                                   fontFamily: 'MontSerrat'
                               ),
                             ),
-                          ),
-                        )
-                    ),
+                          )
+                      ),
 
-                  ),
+                    ),
+        ),
         ],) 
         
       ));
@@ -453,20 +453,15 @@ class _DepartmentHead extends State<DepartmentHead>{
                     serverResponse = responseFromServer;
                    if(serverResponse !=null){
                          setState(() {
-                             deptHeadsClass.DepartmentHead de = new deptHeadsClass.DepartmentHead();
-
-                    int id = serverResponse;
-                    de.id = id;
-                    de.branch.branchId = branchID;
-                    de.member.memberId = memberID;
-                    de.datePosted = datePosted;
-                    de.department.departmentId = deptID;
-                    de.status ="Active";
-                    
-                   
-                   
-                    global.departmentHead.departmentHeads.add(de);
-                    filteredDeptHeads = global.departmentHead.departmentHeads;
+                           DepartmentHeadService.getDeptHead().then((deptheadFromServer) {
+        setState(() {
+          global.departmentHead = deptheadFromServer;
+          global.departmentHead.departmentHeads.removeWhere((item) => item.department.departmentName == null);
+          deptsHeads= global.departmentHead.departmentHeads;
+          filteredDeptHeads = deptsHeads;
+        });
+        
+      });
                  });
       
                    }

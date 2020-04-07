@@ -138,7 +138,7 @@ Future<bool> dialog(str){
                               children: <Widget>[
                                 Container(
                                   height: 100.0,
-                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 12, fontWeight: FontWeight.bold,color: Colors.indigo),),
+                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 8, fontWeight: FontWeight.bold,color: Colors.indigo),),
                                 ),
                               ],
                             ),
@@ -196,7 +196,7 @@ SizedBox(height:15),
       ),
       SizedBox(height:2),
        Padding(
-         padding: const EdgeInsets.only(left:250.0),
+         padding: const EdgeInsets.only(left:180.0),
          child: new RaisedButton(
                  color: Colors.blue.shade900,
                 child: new Text("Send", style: TextStyle(color: Colors.white),),

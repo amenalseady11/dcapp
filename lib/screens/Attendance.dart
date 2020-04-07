@@ -176,7 +176,7 @@ currentAttendance.AttendanceClass2 att = new currentAttendance.AttendanceClass2(
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 9,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),
@@ -300,7 +300,12 @@ currentAttendance.AttendanceClass2 att = new currentAttendance.AttendanceClass2(
                                    ),
                                    Row(
                                      children:<Widget>[
-                                      Text(filteredAttendance[index].branch + ","+" " + filteredAttendance[index].zone, ),
+                                      Column(
+                                       
+                                        children: <Widget>[
+                                          Text(filteredAttendance[index].branch + ","+ filteredAttendance[index].zone, style: TextStyle(fontSize:10), ),
+                                        ],
+                                      ),
                                           
                                            Spacer(),
                                             Column(

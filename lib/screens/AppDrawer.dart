@@ -1,3 +1,10 @@
+import 'package:dcapp/screens/Dashboard.dart';
+import 'package:dcapp/screens/ExpenditureType.dart';
+import 'package:dcapp/screens/IncomeType.dart';
+import 'package:dcapp/screens/ManageExpenditure.dart';
+import 'package:dcapp/screens/ManageIncome.dart';
+import 'package:dcapp/screens/SplashScreen.dart';
+
 import 'RoleManageMent.dart';
 import 'UserManagement.dart';
 
@@ -234,7 +241,7 @@ class AppDrawer extends StatelessWidget {
                           }))
                         }),
 
-                        getAction( Icons.dashboard, 'Dashboard', null, 'Y', 'N', 'N', context, 'Can View Dashboard'),
+                        getAction( Icons.dashboard, 'Dashboard', Dashboard(), 'Y', 'N', 'N', context, 'Can View Dashboard'),
                         getAction( Icons.check_circle, 'Attendance', Attendance(), 'Y', 'Y', 'Y', context, 'Can Manage Attendance'),
                         getAction( Icons.message, 'Send SMS', SendSMS(), 'Y', 'N', 'N', context, 'Can Send SMS'),
                         getAction( Icons.message, 'Send Email', null, 'Y', 'N', 'N', context, 'Can Send Email'),
@@ -252,8 +259,8 @@ class AppDrawer extends StatelessWidget {
                         getAction( Icons.live_tv, 'DC Airfore TV', null, 'N', 'N', 'N', context, 'Can Manage DC Airforce TV'),
                         getAction( Icons.people_outline, 'View Discipleship Status', DiscipleshipStatus(), 'Y', 'N', 'N', context, 'Can View Discipleship Status'),
                         getAction( Icons.group_work, 'Role Management', RoleManagement(), 'Y', 'N', 'N', context, 'Can Create Roles'),
-                        getAction( Icons.attach_money, 'Expenditure', null, 'Y', 'N', 'N', context, 'Can Manage Finances'),
-                        getAction( Icons.attach_money, 'Income', null, 'Y', 'N', 'N', context, 'Can Manage Finances'),
+                        getAction( Icons.attach_money, 'Expenditure', ManageExpenditure(), 'Y', 'N', 'N', context, 'Can Manage Finances'),
+                        getAction( Icons.attach_money, 'Income', ManageIncome(), 'Y', 'N', 'N', context, 'Can Manage Finances'),
                         getAction( Icons.person_pin, 'Manage Meeting', ManageMeeting(), 'Y', 'Y', 'Y', context, 'Can Manage Meetings'),
                         getAction( Icons.person, 'User Management', Usermanagement(), 'Y', 'N', 'N', context, 'Can Manage Users'),
                         getAction( Icons.report, 'Reports', null, 'N', 'N', 'N', context, 'Can View Report'),
@@ -267,7 +274,7 @@ class AppDrawer extends StatelessWidget {
                     () => {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            //  return About();
+                              return SplashScreen();
                           }))
                         }),
               ],

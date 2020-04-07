@@ -94,28 +94,31 @@ class _MemberScreen extends State<MemberScreen> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
-                        child: Center(
-                          child: Text(
-                            'Back to List',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'MontSerrat'),
+                GestureDetector(
+                   onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
+                        child: GestureDetector(
+                         
+                          child: Center(
+                            child: Text(
+                              'Back to List',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'MontSerrat'),
+                            ),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));
@@ -365,8 +368,8 @@ class _MemberScreen extends State<MemberScreen> {
                                       ],)
                                     ],
                                   ),
-                                  
-                                  SizedBox(width:MediaQuery.of(context).size.width/50),
+                                 
+                                  Spacer(),
                                   //Second Column
                                   Column(
                                     children: <Widget>[
@@ -380,15 +383,20 @@ class _MemberScreen extends State<MemberScreen> {
                                               
                                               ),
                                       ],),
+                                     
                                        Row(children: <Widget>[
-                                        Text(
-                                              filteredMembers[index].phoneNumber, textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                              fontSize: 12.0, fontFamily: 'Monseratti'),
-                                              
-                                              ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                                  filteredMembers[index].phoneNumber, textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                  fontSize: 12.0, fontFamily: 'Monseratti'),
+                                                  
+                                                  ),
+                                          ],
+                                        ),
                                       ],),
                                       
                                       SizedBox(height:10),
@@ -403,14 +411,18 @@ class _MemberScreen extends State<MemberScreen> {
                                               ),
                                       ],),
                                        Row(children: <Widget>[
-                                        Text(
-                                              filteredMembers[index].emailAddress, textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                              fontSize: 10.0, fontFamily: 'Monseratti'),
-                                              
-                                              ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text(
+                                                  filteredMembers[index].emailAddress, textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                  fontSize: 10.0, fontFamily: 'Monseratti'),
+                                                  
+                                                  ),
+                                          ],
+                                        ),
                                       ],),
                                        SizedBox(height:10),
                                       Row(children: <Widget>[
@@ -444,15 +456,23 @@ class _MemberScreen extends State<MemberScreen> {
                                               
                                               ),
                                       ],),
-                                       Row(children: <Widget>[
-                                        Text(
-                                              filteredMembers[index].zone.zoneName==null? 'No Zone':filteredMembers[index].zone.zoneName, textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                              fontSize: 14.0, fontFamily: 'Monseratti'),
-                                              
-                                              ),
+                                       Row(
+                                         mainAxisSize: MainAxisSize.max,
+                                         children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: <Widget>[
+                                            Text(
+                                                  filteredMembers[index].zone.zoneName==null? 'No Zone':filteredMembers[index].zone.zoneName, textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                  fontSize: 10.0, fontFamily: 'Monseratti'),
+                                                  
+                                                  ),
+                                          ],
+                                        ),
                                       ],),
                                     ],
                                   ),

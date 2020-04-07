@@ -90,19 +90,19 @@ List<testimonyClass.Testimony> filteredTestimony = new List<testimonyClass.Testi
 
         ),),
         SizedBox(height: 10.0,),
-        Container(
-                    height: 40.0,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blue.shade900,
-                        color: Colors.blue.shade900,
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: (){
-                             Navigator.pop(context);
-                             Navigator.pop(context);
-                             
-                          },
+        GestureDetector(
+           onTap: (){
+                               Navigator.pop(context);
+                               Navigator.pop(context);
+                               
+                            },
+          child: Container(
+                      height: 40.0,
+                      child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.blue.shade900,
+                          color: Colors.blue.shade900,
+                          elevation: 7.0,
                           child: Center(
                             child: Text(
                               'Back to List',
@@ -112,11 +112,11 @@ List<testimonyClass.Testimony> filteredTestimony = new List<testimonyClass.Testi
                                   fontFamily: 'MontSerrat'
                               ),
                             ),
-                          ),
-                        )
-                    ),
+                          )
+                      ),
 
-                  ),
+                    ),
+        ),
         ],) 
         
       ));
@@ -170,7 +170,7 @@ List<testimonyClass.Testimony> filteredTestimony = new List<testimonyClass.Testi
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),

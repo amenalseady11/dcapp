@@ -165,7 +165,7 @@ Future<bool> dialog(str){
                                  
                                   height: 100.0,
                                   
-                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 12, fontWeight: FontWeight.bold,color: Colors.indigo),),
+                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 8, fontWeight: FontWeight.bold,color: Colors.indigo),),
                                 ),
                               ],
                             ),
@@ -223,17 +223,9 @@ Future<bool> dialog(str){
         ),
       ),
       SizedBox(height:6),
-                      Container(
-                        height: 40.0,
-                        child: Material(
-                            borderRadius: BorderRadius.circular(20.0),
-                            shadowColor: Colors.black,
-                            color: Colors.blue.shade900,
-                            elevation: 7.0,
-                            child: GestureDetector(
-                             onTap: () {
-                //save to server
-                 new Future.delayed(Duration.zero, () {
+                      GestureDetector(
+                        onTap: (){
+                           new Future.delayed(Duration.zero, () {
                   loader('Creating News...');
                     dateposted = DateTime.now();
                   
@@ -241,14 +233,12 @@ Future<bool> dialog(str){
                     setState(() {
                     serverResponse = responseFromServer;
                    if(serverResponse !=null){
-                        NewsService.getNews()
+                          NewsService.getNews()
             .then((newsFromServer) {
           setState(() {
             _news = newsFromServer.news;
             _news.removeWhere((item) => item.headline == null);
             _news.removeWhere((item) => item.newsDescription == null);
-           
-
             filterednews = _news;
           });
                  Navigator.pop(context);
@@ -260,27 +250,26 @@ Future<bool> dialog(str){
                    });
              
                  });
-                             },
-                             
-                             child:  Center(
-                                
-                                child: Text(
-                                  'PUBLISH',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'MontSerrat'
-                                  ),
-                                ),
-                                
-                              ),
-                             
-                             
-                             
-                             
-                             
-                             
-                             )))]
+                        },
+                        child: Container(
+                          height: 40.0,
+                          child: Material(
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Colors.black,
+                              color: Colors.blue.shade900,
+                              elevation: 7.0,
+                              child: Center(
+                                 child: Text(
+                                   'PUBLISH',
+                                   style: TextStyle(
+                                       color: Colors.white,
+                                       fontWeight: FontWeight.bold,
+                                       fontFamily: 'MontSerrat'
+                                   ),
+                                 ),
+                                 
+                               ))),
+                      )]
               )
               )
               ]

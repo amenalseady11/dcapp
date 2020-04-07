@@ -1,7 +1,10 @@
 
+import 'dart:io';
+
 import 'package:dcapp/classes/ProfileClass.dart';
 import 'package:flutter/material.dart';
 import 'package:dcapp/globals.dart' as global;
+import 'package:progress_indicators/progress_indicators.dart';
 
 
 class DeptDirectorys extends StatefulWidget {
@@ -17,17 +20,87 @@ var filteredDeptDirectory = List();
 //List<AttendanceClass> attendance = new List<AttendanceClass>();
 //List<DeptDirectory> dept = List();
  
- 
+  Future<bool> loader(String str) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+              title: ScalingText(str),
+            ));
+  }
+
+  Future<bool> dialog(str) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+            title: Text('Message'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  str,
+                  style: TextStyle(fontSize: 14, color: Colors.blue.shade900),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                GestureDetector(
+                  onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
+                        child: Center(
+                          child: Text(
+                            'Back to List',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'MontSerrat'),
+                          ),
+                        )),
+                  ),
+                ),
+              ],
+            )));
+  }
+  Future<bool> checkconnectivity() async {
+    try {
+      final result = await InternetAddress.lookup("google.com");
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }else{
+         return false;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
+
   @override
   void initState() {
     super.initState();
-    setState(() {
-   
+     new Future.delayed(Duration.zero, () async {
+      bool res = await checkconnectivity();
+      if (!res) {
+        dialog("Internet Required, Check your Network Connection");
 
+        return;
+      }
+    setState(() {
     dept = global.profile.deptDirectory.toList();
     filteredDeptDirectory = dept;
     
    });
+     });
   }
 
 
@@ -80,7 +153,7 @@ var filteredDeptDirectory = List();
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),

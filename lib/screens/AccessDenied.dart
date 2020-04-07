@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-class MusicPage extends StatefulWidget {
+class AccessDenied extends StatefulWidget {
   @override
-  _MusicPageState createState() => _MusicPageState();
+  _AccessDeniedState createState() => _AccessDeniedState();
 }
 
-class _MusicPageState extends State<MusicPage> {
+class _AccessDeniedState extends State<AccessDenied> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,11 +88,11 @@ class _MusicPageState extends State<MusicPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Coming Soon ',
+                  Text('ACCESS DENIED',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 20,
+                          color: Colors.red,
+                          fontSize: 30,
                           fontFamily: 'OpenSans'))
                 ],
               )

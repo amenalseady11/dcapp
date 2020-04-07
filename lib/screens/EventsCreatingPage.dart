@@ -108,18 +108,18 @@ class _EventsCreatingPage extends State<EventsCreatingPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
+                GestureDetector(
+                   onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
                         child: Center(
                           child: Text(
                             'Back to List',
@@ -128,8 +128,8 @@ class _EventsCreatingPage extends State<EventsCreatingPage> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'MontSerrat'),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));
@@ -188,7 +188,7 @@ class _EventsCreatingPage extends State<EventsCreatingPage> {
                           child: new Text(
                             '...raising leaders that transforms society',
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 8,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.indigo),
                           ),

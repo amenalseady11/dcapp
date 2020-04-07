@@ -169,7 +169,7 @@ Future<bool> dialog(str){
                                  
                                   height: 100.0,
                                   
-                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 12, fontWeight: FontWeight.bold,color: Colors.indigo),),
+                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 8, fontWeight: FontWeight.bold,color: Colors.indigo),),
                                 ),
                               ],
                             ),
@@ -287,23 +287,14 @@ Future<bool> dialog(str){
                            SizedBox(height: 20.0),
                       SizedBox(height: 20.0),
                       
-                      Container(
-                        height: 40.0,
-                        child: Material(
-                            borderRadius: BorderRadius.circular(20.0),
-                            shadowColor: Colors.black,
-                            color: Colors.blue.shade900,
-                            elevation: 7.0,
-                            child: GestureDetector(
-                             onTap: () {
-
-                //save to server
-                 new Future.delayed(Duration.zero, () {
+                      GestureDetector(
+                        onTap: (){
+                          new Future.delayed(Duration.zero, () {
                   loader('Saving SMS Templates...');
 
                     SmsTemplateService.saveSmsTemplate(branchID,zoneId,smsTitleController.text, smsBodyController.text, ).then((responseFromServer) {
                     setState(() {
-                      
+                        
                     serverResponse = responseFromServer;
                    if(serverResponse !=null){
                  SmsTemplateService.getSmsTemplate().then((deptFromServer) {
@@ -314,21 +305,20 @@ Future<bool> dialog(str){
           filteredsms = _smsClass.sMsTemplates;
         
         });
-      
-                    
                      Navigator.pop(context);
                     dialog('Template Saved');
-
                    }
-                        
                     });
-                    
                    });
-                    
                  });
-                   
-              
-              },
+                        },
+                        child: Container(
+                          height: 40.0,
+                          child: Material(
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Colors.black,
+                              color: Colors.blue.shade900,
+                              elevation: 7.0,
                               child: Center(
                                 
                                 child: Text(
@@ -340,11 +330,10 @@ Future<bool> dialog(str){
                                   ),
                                 ),
                                 
-                              ),
-                              
-                            )
-                        ),
+                              )
+                          ),
 
+                        ),
                       ),
                     
                     

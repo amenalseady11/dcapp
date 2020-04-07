@@ -115,7 +115,7 @@ Future<bool> dialog(str){
                               children: <Widget>[
                                 Container(
                                   height: 100.0,
-                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 12, fontWeight: FontWeight.bold,color: Colors.indigo),),
+                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 8, fontWeight: FontWeight.bold,color: Colors.indigo),),
                                 ),
                               ],
                             ),
@@ -160,35 +160,40 @@ SizedBox(height:15),
       ),
       SizedBox(height:2),
        Padding(
-         padding: const EdgeInsets.only(left:250.0),
-         child: new RaisedButton(
-                 color: Colors.blue.shade900,
-                child: new Text("Send", style: TextStyle(color: Colors.white),),
-                onPressed: () {
-                    new Future.delayed(Duration.zero, () {
-                  loader('Sending SMS...');
+         padding: const EdgeInsets.only(left:180.0),
+         child: Column(
+           crossAxisAlignment: CrossAxisAlignment.end,
+           children: <Widget>[
+             new RaisedButton(
+                     color: Colors.blue.shade900,
+                    child: new Text("Send", style: TextStyle(color: Colors.white),),
+                    onPressed: () {
+                        new Future.delayed(Duration.zero, () {
+                      loader('Sending SMS...');
 
-                 
-               
-                      SMSService.sendSms(global.profile.member.branch.branchId, _smsController.text, global.selectedCategory, "None").then((responseFromServer) {
-                    setState(() {
-                    
-                    Navigator.pop(context);
+                     
+                   
+                          SMSService.sendSms(global.profile.member.branch.branchId, _smsController.text, global.selectedCategory, "None").then((responseFromServer) {
+                        setState(() {
+                        
+                        Navigator.pop(context);
 
-                    if(responseFromServer>0){
-                          dialog('Message sent successfully to ' + responseFromServer.toString() +' receipients');
-                    }else{
-                        dialog('No Receipient found for the selected category');
-                    }
+                        if(responseFromServer>0){
+                              dialog('Message sent successfully to ' + responseFromServer.toString() +' receipients');
+                        }else{
+                            dialog('No Receipient found for the selected category');
+                        }
+                      
+
+                        });
+                       });
+                        
+                     });
                   
-
-                    });
-                   });
-                    
-                 });
-              
-                },
-              ),
+                    },
+                  ),
+           ],
+         ),
        ),
     ],
   ),

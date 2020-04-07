@@ -52,18 +52,18 @@ class _RoleActionListState extends State<RoleActionList> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
+                GestureDetector(
+                   onTap: () {
+                            Navigator.pop(context);
+                            
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
                         child: Center(
                           child: Text(
                             'Back to List',
@@ -72,8 +72,8 @@ class _RoleActionListState extends State<RoleActionList> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'MontSerrat'),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));
@@ -95,7 +95,7 @@ class _RoleActionListState extends State<RoleActionList> {
             .then((roleFromServer) {
           setState(() {
             filteredrole = roleFromServer.roles;
-            Navigator.pop(context);
+            //Navigator.pop(context);
           });
         });
       });
@@ -235,7 +235,7 @@ class _RoleActionListState extends State<RoleActionList> {
                                               Text(
                                                 filteredrole[index].action,
                                                 style: TextStyle(
-                                                    fontSize: 15.0,
+                                                    fontSize: 13.0,
                                                     fontWeight: FontWeight.bold,
                                                     fontFamily: 'Monseratti'),
                                               ),

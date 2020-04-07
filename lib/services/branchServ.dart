@@ -16,11 +16,11 @@ class BranchService{
         List<BranchClass> list = parse(response.body);
         return list;
       }else {
-        throw Exception("Error");
+       // throw Exception("Error");
       }
     }
     catch(e){
-      throw Exception(e.toString());
+     // throw Exception(e.toString());
     }
   }
 

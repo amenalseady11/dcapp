@@ -1,5 +1,6 @@
 import 'package:dcapp/screens/Appointment.dart';
 import 'package:dcapp/screens/DC%20Airforce%20TV.dart';
+import 'package:dcapp/screens/DCRadio.dart';
 import 'package:dcapp/screens/DepartmentDirectory.dart';
 import 'package:dcapp/screens/MembersMeeting.dart';
 import 'package:dcapp/screens/Register.dart';
@@ -7,7 +8,7 @@ import 'package:dcapp/screens/AudioMessage.dart';
 import 'package:dcapp/screens/Books.dart';
 import 'package:dcapp/screens/Devotionals.dart';
 import 'package:dcapp/screens/Events.dart';
-import 'package:dcapp/screens/LiveStream.dart';
+import 'package:dcapp/screens/DCRadio.dart';
 import 'package:dcapp/screens/Music.dart';
 import 'package:dcapp/screens/News.dart';
 import 'package:dcapp/screens/PrayerRequest.dart';
@@ -154,7 +155,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),
@@ -267,8 +268,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
         
         _buildCard('News', 'assets/news.png',  NewsPage(), context),
           _buildCard('Events', 'assets/events.png', EventPage(), context),
+          _buildCard('Department Directory', 'assets/directory.png',DeptDirectorys(), context),
 
-        _buildCard('Live Stream', 'assets/livestream.png', LiveStream(), context),
+      
 
         _buildCard('Prayer Requests', 'assets/prayer.jpg',PrayerRequestPage(),context),
 
@@ -286,7 +288,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
 
         _buildCard('DC Airforce TV', 'assets/DcAirforce.png', DCAirforce(), context),
 
-        _buildCard('Department Directory', 'assets/directory.png',DeptDirectorys(), context)
+         _buildCard('DC Radio', 'assets/radio.png', DCRadio(), context),
        
       ],
     )

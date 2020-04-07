@@ -74,19 +74,19 @@ bookitems(){
 
         ),),
         SizedBox(height: 10.0,),
-        Container(
-                    height: 40.0,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blue.shade900,
-                        color: Colors.blue.shade900,
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: (){
+        GestureDetector(
+           onTap: (){
                              Navigator.pop(context);
                              Navigator.pop(context);
                              
                           },
+          child: Container(
+                      height: 40.0,
+                      child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.blue.shade900,
+                          color: Colors.blue.shade900,
+                          elevation: 7.0,
                           child: Center(
                             child: Text(
                               'Back to List',
@@ -96,11 +96,11 @@ bookitems(){
                                   fontFamily: 'MontSerrat'
                               ),
                             ),
-                          ),
-                        )
-                    ),
+                          )
+                      ),
 
-                  ),
+                    ),
+        ),
         ],) 
         
       ));

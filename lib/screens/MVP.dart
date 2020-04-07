@@ -85,19 +85,19 @@ List<mv.MvP> filteredMvp = new List<mv.MvP>();
 
         ),),
         SizedBox(height: 10.0,),
-        Container(
-                    height: 40.0,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blue.shade900,
-                        color: Colors.blue.shade900,
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: (){
-                             Navigator.pop(context);
-                             Navigator.pop(context);
-                             
-                          },
+        GestureDetector(
+          onTap: (){
+                               Navigator.pop(context);
+                               Navigator.pop(context);
+                               
+                            },
+          child: Container(
+                      height: 40.0,
+                      child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.blue.shade900,
+                          color: Colors.blue.shade900,
+                          elevation: 7.0,
                           child: Center(
                             child: Text(
                               'Back to List',
@@ -107,11 +107,11 @@ List<mv.MvP> filteredMvp = new List<mv.MvP>();
                                   fontFamily: 'MontSerrat'
                               ),
                             ),
-                          ),
-                        )
-                    ),
+                          )
+                      ),
 
-                  ),
+                    ),
+        ),
         ],) 
         
       ));
@@ -165,7 +165,7 @@ List<mv.MvP> filteredMvp = new List<mv.MvP>();
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),
@@ -236,7 +236,7 @@ List<mv.MvP> filteredMvp = new List<mv.MvP>();
               ),),
             Expanded(
               child: ListView.builder(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(5.0),
                   itemCount: filteredMvp.length,
                   itemBuilder: (BuildContext context, int index){
                     return InkWell(
@@ -250,7 +250,7 @@ List<mv.MvP> filteredMvp = new List<mv.MvP>();
 
                       child:  Card(
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(5.0),
                           child: 
                           
                           Row(
@@ -260,39 +260,44 @@ List<mv.MvP> filteredMvp = new List<mv.MvP>();
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                  Padding(
-                                   padding: const EdgeInsets.only(left:18.0),
+                                   padding: const EdgeInsets.only(left:10.0),
                                    child: 
                                    Column(
-                                     
                                      children: <Widget>[
-                                       Column(
+                                       Row(
+                                         crossAxisAlignment: CrossAxisAlignment.start,
                                          children: <Widget>[
-                                           Row(
-                                             children: <Widget>[
-                                               Column(
-                                                 children: <Widget>[
-                                                   Text(filteredMvp[index].memberName , 
-                                                   style: TextStyle(
-                                                        fontSize: 18.0,
-                                                        fontWeight: FontWeight.bold,
-                                                       fontFamily: 'Monseratti'
+                                           Text(filteredMvp[index].memberName , 
+                                           style: TextStyle(
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                               fontFamily: 'Monseratti'
 
-                                                   ),),
-                                                 ],
-                                               ),
-                                               SizedBox(width: 20),
-                                              
-                                             ],
-                                             
-                                           ),
-                                           Row(children:<Widget>[
-                                              Text(filteredMvp[index].branch  + "," + " " + filteredMvp[index].zone, style: TextStyle(color: Colors.grey, fontSize: 13),)
-                                           ])
+                                           ),),
                                          ],
+                                         
                                        ),
+                                       SizedBox(height:5),
+                                       Column(
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                         children:<Widget>[
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Column(
+                                                children: <Widget>[
+                                                  Text(filteredMvp[index].branch+ " ,"+filteredMvp[index].zone,  style: TextStyle(color: Colors.grey, fontSize: 10),),
+                                                ],
+                                              ),
+                                            ],
+                                          )
+                                       ]
+                                       ),
+                                        SizedBox(height:5),
                                       
-                                     
                                      ],
+
+                                     
                                    ),
                                   
                                  ),
@@ -307,7 +312,7 @@ List<mv.MvP> filteredMvp = new List<mv.MvP>();
                                     icon: Icon(Icons.call,color: Colors.green, size: 30,),
                                    onPressed: ()=> launch("tel:${filteredMvp[index].phoneNumber.toString()}"),
                                   ),
-                                      SizedBox(width: 5),
+                                      
                                     Column(children:<Widget>[
                                       Text(filteredMvp[index].phoneNumber, style: TextStyle(fontSize:18),),
                                     ])

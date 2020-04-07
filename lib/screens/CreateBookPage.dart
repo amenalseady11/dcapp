@@ -64,18 +64,18 @@ class _CreateBookPage extends State<CreateBookPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
+                GestureDetector(
+                   onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
                         child: Center(
                           child: Text(
                             'Back to List',
@@ -84,8 +84,8 @@ class _CreateBookPage extends State<CreateBookPage> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'MontSerrat'),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));
@@ -144,7 +144,7 @@ class _CreateBookPage extends State<CreateBookPage> {
                           child: new Text(
                             '...raising leaders that transforms society',
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 9,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.indigo),
                           ),
@@ -308,58 +308,57 @@ class _CreateBookPage extends State<CreateBookPage> {
                             ? Text('No book selected')
                             : Text(_file.path),
                       ),
-                      Container(
-                          height: 40.0,
-                          child: Material(
-                              borderRadius: BorderRadius.circular(20.0),
-                              shadowColor: Colors.black,
-                              color: Colors.blue.shade900,
-                              elevation: 7.0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  //save to server
-                                  new Future.delayed(Duration.zero, () {
-                                    loader('Posting Book...');
-                                    BookService.postBook(
-                                            _titleController.text,
-                                            _descriptionController.text,
-                                            _authorController.text,
-                                            DateTime.now(),
-                                            _selectedStatus,
-                                            _amountController.text,
-                                            "test.url",
-                                            "Active",
-                                            "test.url",
-                                            bookPath,
-                                            filepath)
-                                        .then((responseFromServer) {
-                                      setState(() {
-                                        serverResponse = responseFromServer;
-                                        if (serverResponse != null) {
-                                          BookService.getBooks()
-                                              .then((eventsFromServer) {
-                                            setState(() {
-                                              _book = eventsFromServer.books;
-                                              _book.removeWhere((item) =>
-                                                  item.description == null);
-                                              _book.removeWhere(
-                                                  (item) => item.title == null);
-                                              _book.removeWhere((item) =>
-                                                  item.category == null);
-                                              _book.removeWhere((item) =>
-                                                  item.thumbnail == null);
-                                              _book.removeWhere((item) =>
-                                                  item.author == null);
-                                              filteredBooks = _book;
+                      GestureDetector(
+                        onTap: (){
+                             new Future.delayed(Duration.zero, () {
+                                      loader('Posting Book...');
+                                      BookService.postBook(
+                                              _titleController.text,
+                                              _descriptionController.text,
+                                              _authorController.text,
+                                              DateTime.now(),
+                                              _selectedStatus,
+                                              _amountController.text,
+                                              "test.url",
+                                              "Active",
+                                              "test.url",
+                                              bookPath,
+                                              filepath)
+                                          .then((responseFromServer) {
+                                        setState(() {
+                                          serverResponse = responseFromServer;
+                                          if (serverResponse != null) {
+                                            BookService.getBooks()
+                                                .then((eventsFromServer) {
+                                              setState(() {
+                                                _book = eventsFromServer.books;
+                                                _book.removeWhere((item) =>
+                                                    item.description == null);
+                                                _book.removeWhere(
+                                                    (item) => item.title == null);
+                                                _book.removeWhere((item) =>
+                                                    item.category == null);
+                                                _book.removeWhere((item) =>
+                                                    item.thumbnail == null);
+                                                _book.removeWhere((item) =>
+                                                    item.author == null);
+                                                filteredBooks = _book;
+                                              });
+                                              Navigator.pop(context);
+                                              dialog('Book Posted');
                                             });
-                                            Navigator.pop(context);
-                                            dialog('Book Posted');
-                                          });
-                                        }
+                                          }
+                                        });
                                       });
                                     });
-                                  });
-                                },
+                        },
+                        child: Container(
+                            height: 40.0,
+                            child: Material(
+                                borderRadius: BorderRadius.circular(20.0),
+                                shadowColor: Colors.black,
+                                color: Colors.blue.shade900,
+                                elevation: 7.0,
                                 child: Center(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -371,8 +370,8 @@ class _CreateBookPage extends State<CreateBookPage> {
                                           fontFamily: 'MontSerrat'),
                                     ),
                                   ),
-                                ),
-                              ))),
+                                ))),
+                      ),
                     ]))
               ]))
         ]));

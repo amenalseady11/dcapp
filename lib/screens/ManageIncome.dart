@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-class MusicPage extends StatefulWidget {
+class ManageIncome extends StatefulWidget {
   @override
-  _MusicPageState createState() => _MusicPageState();
+  _ManageIncomeState createState() => _ManageIncomeState();
 }
 
-class _MusicPageState extends State<MusicPage> {
+class _ManageIncomeState extends State<ManageIncome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

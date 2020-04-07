@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:dcapp/screens/ReadDevotionalPage.dart';
 import 'package:dcapp/services/DevotionalServe.dart';
 import 'package:flutter/material.dart';
@@ -22,44 +24,7 @@ class _DevotionalsPageState extends State<DevotionalsPage> {
   // List<news.News> filteredNews = List<news.News>();
   
   int count =0; 
-
-  
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      new Future.delayed(Duration.zero, () {
-        loader(' Loading  Devotionals ...');
-
-        DevotionalService.getDevotional().then((devotionalFromServer) {
-          setState(() {
-            _devotionals = devotionalFromServer.devotionals;
-            _devotionals.removeWhere((item) => item.title == null);
-            _devotionals.removeWhere((item) => item.devotionaltext == null);
-            _devotionals.removeWhere((item) => item.datePublished == null);
-            filteredDevotionals = _devotionals;
-            filteredDevotionals.sort((b, a) => a.datePublished.compareTo(b.datePublished));
-            Navigator.pop(context);
-          });
-        });
-      });
-    });
-  }
-
-  String getDate(DateTime date) {
-    var formatdateposted = new DateFormat('MMMM, dd yyyy');
-    String formateddateposted = formatdateposted.format(date);
-    return formateddateposted.toString();
-  }
-
-  String getEventsDate(DateTime event) {
-    var date2 = DateTime.now();
-    final difference = event.difference(date2).inDays;
-    return difference.toString();
-  }
-
-  Future<bool> loader(String str) {
+   Future<bool> loader(String str) {
     return showDialog(
         context: context,
         barrierDismissible: false,
@@ -84,18 +49,18 @@ class _DevotionalsPageState extends State<DevotionalsPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
+                GestureDetector(
+                     onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
                         child: Center(
                           child: Text(
                             'Back to List',
@@ -104,12 +69,71 @@ class _DevotionalsPageState extends State<DevotionalsPage> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'MontSerrat'),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));
   }
+
+   Future<bool> checkconnectivity() async {
+    try {
+      final result = await InternetAddress.lookup("google.com");
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }else{
+         return false;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
+  
+
+  @override
+  void initState() {
+    super.initState();
+    new Future.delayed(Duration.zero, () async {
+      bool res = await checkconnectivity();
+      if (!res) {
+        dialog("Internet Required, Check your Network Connection");
+
+        return;
+      }
+    setState(() {
+      new Future.delayed(Duration.zero, () {
+        loader(' Loading  Devotionals ...');
+
+        DevotionalService.getDevotional().then((devotionalFromServer) {
+          setState(() {
+            _devotionals = devotionalFromServer.devotionals;
+            _devotionals.removeWhere((item) => item.title == null);
+            _devotionals.removeWhere((item) => item.devotionaltext == null);
+            _devotionals.removeWhere((item) => item.datePublished == null);
+            filteredDevotionals = _devotionals;
+            filteredDevotionals.sort((b, a) => a.datePublished.compareTo(b.datePublished));
+            Navigator.pop(context);
+          });
+        });
+      });
+    });
+    });
+  }
+
+  String getDate(DateTime date) {
+    var formatdateposted = new DateFormat('MMMM, dd yyyy');
+    String formateddateposted = formatdateposted.format(date);
+    return formateddateposted.toString();
+  }
+
+  String getEventsDate(DateTime event) {
+    var date2 = DateTime.now();
+    final difference = event.difference(date2).inDays;
+    return difference.toString();
+  }
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +181,7 @@ class _DevotionalsPageState extends State<DevotionalsPage> {
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),
@@ -325,7 +349,12 @@ class _DevotionalsPageState extends State<DevotionalsPage> {
                               (
                                 padding: EdgeInsets.only(left:0),
                                 icon: Icon(Icons.arrow_right, size: 50,),
-                               onPressed: () {
+                               onPressed: () async{
+                                  bool res = await checkconnectivity();
+                                 if (!res) {
+                                  dialog("Internet Required, Check your Network Connection");
+                                  return;
+                                   }
                                  global.devotionaId = filteredDevotionals[index].id;
                                    Navigator.push(context, MaterialPageRoute(builder: (context){
                                    

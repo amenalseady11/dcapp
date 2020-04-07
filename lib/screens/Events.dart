@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dcapp/services/EventServe.dart';
 import 'package:flutter/material.dart';
 import 'package:dcapp/classes/EventsClass.dart' as events;
@@ -22,47 +24,7 @@ class _EventPageState extends State<EventPage> {
   String description;
 
   int serverResponse;
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      new Future.delayed(Duration.zero, () {
-        loader(' Loading  Events ...');
-
-        EventService.getEvents().then((eventsFromServer) {
-          
-          setState(() {
-            even = eventsFromServer.events;
-            even.removeWhere((item) => item.description == null);
-            even.removeWhere((item) => item.venue == null);
-            even.removeWhere((item) => item.title == null);
-            filteredEvents = even;
-            
-
-            Navigator.pop(context);
-          });
-        });
-      });
-    });
-  }
-
-  String getDate(DateTime date) {
-    var formatdateposted = new DateFormat('yyyy-MMM-dd');
-    String formateddateposted = formatdateposted.format(date);
-    return formateddateposted.toString();
-  }
-
-  String getEventsDate(DateTime event) {
-    var date2 = DateTime.now();
-    final difference = event.difference(date2).inDays;
-    
-    return difference.toString();
-  }
-
-
- 
-  Future<bool> loader(String str) {
+   Future<bool> loader(String str) {
     return showDialog(
         context: context,
         barrierDismissible: false,
@@ -87,18 +49,18 @@ class _EventPageState extends State<EventPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
+                GestureDetector(
+                   onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
                         child: Center(
                           child: Text(
                             'Back to List',
@@ -107,12 +69,75 @@ class _EventPageState extends State<EventPage> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'MontSerrat'),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));
   }
+  Future<bool> checkconnectivity() async {
+    try {
+      final result = await InternetAddress.lookup("google.com");
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }else{
+         return false;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
+
+
+  @override
+  void initState() {
+    super.initState();
+     new Future.delayed(Duration.zero, () async {
+      bool res = await checkconnectivity();
+      if (!res) {
+        dialog("Internet Required, Check your Network Connection");
+
+        return;
+      }
+    setState(() {
+      new Future.delayed(Duration.zero, () {
+        loader(' Loading  Events ...');
+
+        EventService.getEvents().then((eventsFromServer) {
+          
+          setState(() {
+            even = eventsFromServer.events;
+            even.removeWhere((item) => item.description == null);
+            even.removeWhere((item) => item.venue == null);
+            even.removeWhere((item) => item.title == null);
+            filteredEvents = even;
+            
+
+            Navigator.pop(context);
+          });
+        });
+      });
+    });
+     });
+  }
+
+  String getDate(DateTime date) {
+    var formatdateposted = new DateFormat('yyyy-MMM-dd');
+    String formateddateposted = formatdateposted.format(date);
+    return formateddateposted.toString();
+  }
+
+  String getEventsDate(DateTime event) {
+    var date2 = DateTime.now();
+    final difference = event.difference(date2).inDays;
+    
+    return difference.toString();
+  }
+
+
+ 
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +185,7 @@ class _EventPageState extends State<EventPage> {
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),

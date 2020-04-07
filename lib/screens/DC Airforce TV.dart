@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:dcapp/classes/DcAirforceClass.dart';
 import 'package:dcapp/classes/DCAirforceModelClass.dart';
 import 'package:dcapp/screens/VideoScreen.dart';
 import 'package:dcapp/services/DCAirforceServ.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class DCAirforce extends StatefulWidget {
   @override
@@ -13,14 +16,88 @@ class DCAirforce extends StatefulWidget {
 class _DCAirforceState extends State<DCAirforce> {
   Channel _channel;
   bool _isLoading = false;
+   Future<bool> loader(String str){
+    return showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context)=> AlertDialog(
+          title: ScalingText(str),
+        ));
+  }
+
+  Future<bool> dialog(str){
+  return showDialog(context: context,
+      barrierDismissible: false,
+      builder: (context)=> AlertDialog(
+        title:Text('Message') ,
+        content:Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(str, style: TextStyle(
+          fontSize: 14,
+          color: Colors.blue.shade900
+
+        ),),
+        SizedBox(height: 10.0,),
+        GestureDetector(
+          onTap: (){
+                               Navigator.pop(context);
+                                Navigator.pop(context);
+                            },
+          child: Container(
+                      height: 40.0,
+                      child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.blue.shade900,
+                          color: Colors.blue.shade900,
+                          elevation: 7.0,
+                          child: Center(
+                            child: Text(
+                              'Back to List',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'MontSerrat'
+                              ),
+                            ),
+                          )
+                      ),
+
+                    ),
+        ),
+        ],) 
+        
+      ));
+    }
+
+
+ Future<bool> checkconnectivity() async {
+    try {
+      final result = await InternetAddress.lookup("google.com");
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }else{
+         return false;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+   
     _initChannel();
+    
   }
 
   _initChannel() async {
+      bool res = await checkconnectivity();
+      if (!res) {
+        dialog("Internet Required, Check your Network Connection");
+
+        return;
+      }
     Channel channel = await APIService.instance
         .fetchChannel(channelId: 'UChZqK8Mb0lvkmvNIQXJ5keA');
     setState(() {
@@ -222,7 +299,7 @@ class _DCAirforceState extends State<DCAirforce> {
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),

@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:io';
 
 import 'package:dcapp/classes/BranchClass.dart';
 import 'package:dcapp/classes/PrayerRequestClass.dart' as prayers;
@@ -33,36 +34,7 @@ class _PrayerRequestPage extends State<PrayerRequestPage> {
   DateTime dateRequested;
   int serverResponse;
 
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      
-      new Future.delayed(Duration.zero, () {
-        loader(' Loading  Prayer Request ...');
-
-        PrayerRequestService.getPrayerRequest(global.profile.member.memberId)
-            .then((prayerRequestFromServer) {
-          setState(() {
-            prayer = prayerRequestFromServer.prayerRequests;
-            prayer.removeWhere((item) => item.branch.branchName == null);
-
-            filteredPrayerRequest = prayer;
-
-            Navigator.pop(context);
-          });
-        });
-      });
-    });
-  }
-
-  String getDate(DateTime date) {
-    var formatdateposted = new DateFormat('yyyy-MM-dd');
-    String formateddateposted = formatdateposted.format(date);
-    return formateddateposted.toString();
-  }
-
-  Future<bool> loader(String str) {
+   Future<bool> loader(String str) {
     return showDialog(
         context: context,
         barrierDismissible: false,
@@ -87,18 +59,18 @@ class _PrayerRequestPage extends State<PrayerRequestPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor: Colors.blue.shade900,
-                      color: Colors.blue.shade900,
-                      elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
+                GestureDetector(
+                   onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                        borderRadius: BorderRadius.circular(20.0),
+                        shadowColor: Colors.blue.shade900,
+                        color: Colors.blue.shade900,
+                        elevation: 7.0,
                         child: Center(
                           child: Text(
                             'Back to List',
@@ -107,12 +79,63 @@ class _PrayerRequestPage extends State<PrayerRequestPage> {
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'MontSerrat'),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 ),
               ],
             )));
   }
+   Future<bool> checkconnectivity() async {
+    try {
+      final result = await InternetAddress.lookup("google.com");
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }else{
+         return false;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    new Future.delayed(Duration.zero, () async {
+      bool res = await checkconnectivity();
+      if (!res) {
+        dialog("Internet Required, Check your Network Connection");
+
+        return;
+      }
+    setState(() {
+      
+      new Future.delayed(Duration.zero, () {
+        loader(' Loading  Prayer Request ...');
+
+        PrayerRequestService.getPrayerRequest(global.profile.member.memberId)
+            .then((prayerRequestFromServer) {
+          setState(() {
+            prayer = prayerRequestFromServer.prayerRequests;
+            prayer.removeWhere((item) => item.branch.branchName == null);
+
+            filteredPrayerRequest = prayer;
+
+            Navigator.pop(context);
+          });
+        });
+      });
+    });
+    });
+  }
+
+  String getDate(DateTime date) {
+    var formatdateposted = new DateFormat('yyyy-MM-dd');
+    String formateddateposted = formatdateposted.format(date);
+    return formateddateposted.toString();
+  }
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +184,7 @@ class _PrayerRequestPage extends State<PrayerRequestPage> {
                         child: new Text(
                           '...raising leaders that transforms society',
                           style: TextStyle(
-                              fontSize: 9,
+                              fontSize: 8,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),
@@ -175,7 +198,13 @@ class _PrayerRequestPage extends State<PrayerRequestPage> {
           ]),
            actions: <Widget>[
 
-            new IconButton(icon: new Icon(Icons.add,color: Colors.blue.shade900,),onPressed: (){_displayDialog(context);},),
+            new IconButton(icon: new Icon(Icons.add,color: Colors.blue.shade900,),onPressed: ()async{
+               bool res = await checkconnectivity();
+                    if (!res) {
+                   dialog("Internet Required, Check your Network Connection");
+                   return;
+                   }
+              _displayDialog(context);},),
 
           ],
           backgroundColor: Colors.white,

@@ -60,19 +60,19 @@ Future<bool> dialog(str){
 
         ),),
         SizedBox(height: 10.0,),
-        Container(
-                    height: 40.0,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.blue.shade900,
-                        color: Colors.blue.shade900,
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: (){
-                             Navigator.pop(context);
-                             Navigator.pop(context);
-                             
-                          },
+        GestureDetector(
+            onTap: (){
+                               Navigator.pop(context);
+                               Navigator.pop(context);
+                               
+                            },
+          child: Container(
+                      height: 40.0,
+                      child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.blue.shade900,
+                          color: Colors.blue.shade900,
+                          elevation: 7.0,
                           child: Center(
                             child: Text(
                               'Back to List',
@@ -82,11 +82,11 @@ Future<bool> dialog(str){
                                   fontFamily: 'MontSerrat'
                               ),
                             ),
-                          ),
-                        )
-                    ),
+                          )
+                      ),
 
-                  ),
+                    ),
+        ),
         ],) 
         
       ));
@@ -140,7 +140,7 @@ Future<bool> dialog(str){
                               children: <Widget>[
                                 Container(
                                   height: 100.0,
-                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 12, fontWeight: FontWeight.bold,color: Colors.indigo),),
+                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 8, fontWeight: FontWeight.bold,color: Colors.indigo),),
                                 ),
                               ],
                             ),
@@ -202,7 +202,7 @@ SizedBox(height:15),
       ),
       SizedBox(height:2),
        Padding(
-         padding: const EdgeInsets.only(left:250.0),
+         padding: const EdgeInsets.only(left:180.0),
          child: new RaisedButton(
                  color: Colors.blue.shade900,
                 child: new Text("Send", style: TextStyle(color: Colors.white),),

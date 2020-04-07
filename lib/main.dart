@@ -3,12 +3,13 @@ import 'package:dcapp/screens/Appointment.dart';
 import 'package:dcapp/screens/AudioMessage.dart';
 import 'package:dcapp/screens/Books.dart';
 import 'package:dcapp/screens/DC%20Airforce%20TV.dart';
+import 'package:dcapp/screens/DCRadio.dart';
 import 'package:dcapp/screens/DepartmentDirectory.dart';
 import 'package:dcapp/screens/Devotionals.dart';
 import 'package:dcapp/screens/Donations.dart';
 import 'package:dcapp/screens/Events.dart';
 import 'package:dcapp/screens/Home.dart';
-import 'package:dcapp/screens/LiveStream.dart';
+import 'package:dcapp/screens/DCRadio.dart';
 import 'package:dcapp/screens/Login.dart';
 import 'package:dcapp/screens/ManageDevotionals.dart';
 import 'package:dcapp/screens/ManageEvents.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         'Appointment': (BuildContext context)=> new Appointment(),
          'News': (BuildContext context)=> new NewsPage(),
           'Events': (BuildContext context)=> new EventPage(),
-           'LiveStream': (BuildContext context)=> new LiveStream(),
+           'LiveStream': (BuildContext context)=> new DCRadio(),
             'PrayerRequest': (BuildContext context)=> new PrayerRequestPage(),
              'Testimony': (BuildContext context)=> new Testimony(),
               'Devotionals': (BuildContext context)=> new DevotionalsPage(),
