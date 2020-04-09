@@ -44,7 +44,7 @@ class _SMS extends State<SMS> {
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-              title: ScalingText(str),
+              title: ScalingText(str,style: TextStyle(fontSize:10),),
             ));
   }
 

@@ -435,13 +435,7 @@ class _BranchHead extends State<BranchHead>{
                  });
                 }),
 
-                new RaisedButton(
-                color: Colors.red,
-                child: new Text('Delete'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+               
 
               new RaisedButton(
                 color: Colors.grey,

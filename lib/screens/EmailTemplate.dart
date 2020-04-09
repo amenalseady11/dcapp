@@ -58,7 +58,7 @@ class _Email extends State<Email> {
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-              title: ScalingText(str),
+              title: ScalingText(str,style: TextStyle(fontSize:12),),
             ));
   }
 

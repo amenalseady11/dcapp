@@ -438,7 +438,7 @@ class _ZoneHead extends State<ZoneHead>{
           global.zoneHead = zoneheadFromServer;
           global.zoneHead.zoneHeads.removeWhere((item) => item.zone.zoneName == null);
           zoneheads= global.zoneHead.zoneHeads;
-          filteredZoneHeads = zoneheads;
+          filteredZoneHeads = zoneheads.where((c)=>c.zone.branch.branchId == global.profile.member.branch.branchId).toList();
          // 
         });
       });
@@ -450,13 +450,7 @@ class _ZoneHead extends State<ZoneHead>{
                  });
                 }),
 
-                new RaisedButton(
-                color: Colors.red,
-                child: new Text('Delete'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+               
 
               new RaisedButton(
                 color: Colors.grey,

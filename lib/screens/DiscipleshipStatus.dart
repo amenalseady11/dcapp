@@ -530,14 +530,7 @@ class _DiscipleshipStatus extends State<DiscipleshipStatus> {
       //            });
                 }),
 
-                new RaisedButton(
-                color: Colors.red,
-                child: new Text('Delete'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-
+               
               new RaisedButton(
                 color: Colors.grey,
                 child: new Text('Close'),

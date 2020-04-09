@@ -438,7 +438,7 @@ var getmemberbranch = global.profile.member.branch.branchId;
                                                       style: TextStyle(
                                                         color: Colors.grey,
                                                         fontWeight: FontWeight.bold,
-                                                      fontSize: 12.0, fontFamily: 'Monseratti'),
+                                                      fontSize: 11.0, fontFamily: 'Monseratti'),
                                                       
                                                       ),
                                               ],),
@@ -466,7 +466,7 @@ var getmemberbranch = global.profile.member.branch.branchId;
                                               style: TextStyle(
                                                 color: Colors.grey,
                                                 fontWeight: FontWeight.bold,
-                                              fontSize: 12.0, fontFamily: 'Monseratti'),
+                                              fontSize: 11.0, fontFamily: 'Monseratti'),
                                               
                                               ),
                                       ],),
@@ -478,7 +478,7 @@ var getmemberbranch = global.profile.member.branch.branchId;
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
-                                                  fontSize: 10.0, fontFamily: 'Monseratti'),
+                                                  fontSize: 9.0, fontFamily: 'Monseratti'),
                                                   
                                                   ),
                                           ],

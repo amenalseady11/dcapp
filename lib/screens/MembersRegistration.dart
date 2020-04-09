@@ -697,6 +697,7 @@ class _FormTemplate extends State<FormTemplate> {
                               });
                             },
                             child: Container(
+                            
                               height: 40.0,
                               child: Material(
                                   borderRadius: BorderRadius.circular(20.0),
@@ -713,7 +714,9 @@ class _FormTemplate extends State<FormTemplate> {
                                     ),
                                   )),
                             ),
+                            
                           ),
+                          SizedBox(height:30)
                         ],
                       ),
                     )

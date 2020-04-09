@@ -101,8 +101,9 @@ class _DepartmentHead extends State<DepartmentHead>{
   Future<bool> loader(String str){
     return showDialog(context: context,
         barrierDismissible: false,
+        
         builder: (context)=> AlertDialog(
-          title: ScalingText(str),
+          title: ScalingText(str,style: TextStyle(fontSize:14),),
         ));
   }
 
@@ -115,7 +116,7 @@ class _DepartmentHead extends State<DepartmentHead>{
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(str, style: TextStyle(
-          fontSize: 14,
+          fontSize: 10,
           color: Colors.blue.shade900
 
         ),),
@@ -266,7 +267,7 @@ class _DepartmentHead extends State<DepartmentHead>{
                                              children: <Widget>[
                                                Text(filteredDeptHeads[index].member.surName + " " + filteredDeptHeads[index].member.firstName, 
                                                style: TextStyle(
-                                                    fontSize: 15.0,
+                                                    fontSize: 12.0,
                                                     fontWeight: FontWeight.bold,
                                                    fontFamily: 'Monseratti'
 
@@ -276,7 +277,7 @@ class _DepartmentHead extends State<DepartmentHead>{
                                            SizedBox(width: 20),
                                            Column(
                                              children:<Widget>[
-                                             Text('(${filteredDeptHeads[index].department.departmentName.toString()})',style: TextStyle(fontWeight:FontWeight.bold),)
+                                             Text('(${filteredDeptHeads[index].department.departmentName.toString()})',style: TextStyle(fontWeight:FontWeight.bold,fontSize: 10),)
                                            ])
                                          ],
                                          
@@ -350,7 +351,7 @@ class _DepartmentHead extends State<DepartmentHead>{
           return AlertDialog(
             title: Row(
               children: <Widget>[
-                Text(' Add/Update Department Head'),
+                Text(' Add/Update Department Head',style: TextStyle(fontSize:15),),
               ],
             ),
             content: Column(
@@ -443,7 +444,8 @@ class _DepartmentHead extends State<DepartmentHead>{
                 onPressed: () {
                   
                  new Future.delayed(Duration.zero, () {
-                  loader('Saving Department Head...');
+                   
+                  loader('Saving Department Head');
 
                   datePosted= DateTime.now();
 
@@ -458,7 +460,7 @@ class _DepartmentHead extends State<DepartmentHead>{
           global.departmentHead = deptheadFromServer;
           global.departmentHead.departmentHeads.removeWhere((item) => item.department.departmentName == null);
           deptsHeads= global.departmentHead.departmentHeads;
-          filteredDeptHeads = deptsHeads;
+          filteredDeptHeads = deptsHeads.where((c)=>c.branch.branchId==global.profile.member.branch.branchId).toList();
         });
         
       });
@@ -472,13 +474,7 @@ class _DepartmentHead extends State<DepartmentHead>{
                  });
                 }),
 
-                new RaisedButton(
-                color: Colors.red,
-                child: new Text('Delete'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+               
 
               new RaisedButton(
                 color: Colors.grey,

@@ -39,7 +39,7 @@ class _PrayerRequestPage extends State<PrayerRequestPage> {
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-              title: ScalingText(str),
+              title: ScalingText(str,style: TextStyle(fontSize:10),),
             ));
   }
 
