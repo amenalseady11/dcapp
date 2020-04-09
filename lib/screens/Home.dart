@@ -1,9 +1,12 @@
+import 'package:dcapp/classes/DiscipleshipStatusClass.dart';
 import 'package:dcapp/screens/Appointment.dart';
 import 'package:dcapp/screens/DC%20Airforce%20TV.dart';
 import 'package:dcapp/screens/DCRadio.dart';
 import 'package:dcapp/screens/DepartmentDirectory.dart';
 import 'package:dcapp/screens/MembersMeeting.dart';
-import 'package:dcapp/screens/Register.dart';
+import 'package:dcapp/services/DiscipleshipStatusServe.dart';
+import 'package:dcapp/services/TokenServe.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:dcapp/screens/AudioMessage.dart';
 import 'package:dcapp/screens/Books.dart';
 import 'package:dcapp/screens/Devotionals.dart';
@@ -13,7 +16,7 @@ import 'package:dcapp/screens/Music.dart';
 import 'package:dcapp/screens/News.dart';
 import 'package:dcapp/screens/PrayerRequest.dart';
 import 'package:dcapp/screens/Testimony.dart';
-import 'package:dcapp/screens/Tithe&Offering.dart';
+
 import 'package:dcapp/services/BranchHeadServ.dart';
 import 'package:dcapp/services/deptServ.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +35,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
- 
+final FirebaseMessaging _messaging = new FirebaseMessaging();
+
+
   TabController tabcontroller;
   initState() {
     super.initState();
 
+    _messaging.getToken().then((token){
+      TokenService.postToken(global.profile.member.memberId, token);
+     // print(token);
+    });
      BranchService.getBranches().then((branchesFromServer) {
         setState(() {
           global.branches = branchesFromServer;
@@ -70,6 +79,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
         });
       });
 
+
+       DiscipleshipStatuservice.getDiscipleshipStatus(global.profile.member.branch.branchId).then((trainingfromServer) {
+        setState(() {
+          global.alltraining = trainingfromServer.trainings;
+        });
+      });
+
        BranchHeadService.getBranchHead().then((branchheadFromServer) {
         setState(() {
           global.branchHead = branchheadFromServer;
@@ -78,6 +94,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
         });
       });
 
+      
 
 
 

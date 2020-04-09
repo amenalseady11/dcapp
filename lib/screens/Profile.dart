@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dcapp/classes/ProfileClass.dart';
 import 'package:dcapp/globals.dart' as global;
 import 'package:dcapp/screens/MemberDepartment.dart';
@@ -78,23 +79,6 @@ class _ProfileState extends State<Profile>
                   child: Row(
                     
                     children: <Widget>[
-                      Container(
-                        
-                        height: 110.0,
-                        width: 110.0,
-                        decoration: BoxDecoration(
-                          
-                            borderRadius: BorderRadius.circular(100),
-                            image: DecorationImage(
-                                image: AssetImage('assets/boss.jpg'),
-                                fit: BoxFit.fill),
-                                 boxShadow: [
-                       BoxShadow(blurRadius: 20.0, color: Colors.black),
-                      
-                     ]
-                                ),
-                      ),
-                      SizedBox(width: 15.0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[

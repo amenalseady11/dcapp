@@ -107,8 +107,9 @@ Future<bool> dialog(str){
     super.initState();
     setState(() {
      zn =global.zones;
-     filteredZones = zn;
+     filteredZones = zn.where((c)=>c.branch.branchId==global.profile.member.branch.branchId).toList();
      filteredBranches=global.branches;
+     
      
    });
   }
@@ -302,21 +303,14 @@ Future<bool> dialog(str){
                     setState(() {
                     serverResponse = responseFromServer;
                    if(serverResponse !=null){
-                    ZoneClass zn= new ZoneClass();
-
-                    int id = serverResponse;
-                    zn.zoneId =id;
-                    zn.zoneName =zone;
-                    zn.adress = address;
-                    zn.branch.branchId = branchId;
-                    global.zones.add(zn);
-                    filteredZones= global.zones;
-
-
-                   }
-                  
-                    Navigator.pop(context);
+                       Navigator.pop(context);
                     dialog('Zone Saved');
+                   }
+                  else{
+                     Navigator.pop(context);
+                    dialog('Error Saving Zone');
+                  }
+                   
 
                     });
                     

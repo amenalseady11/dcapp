@@ -88,7 +88,7 @@ class _ManageMeeting extends State<ManageMeeting> {
       if (global.checkifzonehead == 'Yes') {
           meetingRoom = new MeetingRooms();
           meetingRoom.roomTitle =
-              global.profile.member.zone.zoneName + ' Meeting Room';
+              global.profile.member.zone.zoneName + ' Zone Meeting Room';
           meetingRoom.roomId =
               'zone' + global.profile.member.zone.zoneId.toString();
           meetingRooms.add(meetingRoom);
@@ -98,7 +98,7 @@ class _ManageMeeting extends State<ManageMeeting> {
 
      if (global.checkifdepthhead == 'Yes') {
           meetingRoom = new MeetingRooms();
-          meetingRoom.roomTitle = global.departmentheadDept + ' Meeting Room';
+          meetingRoom.roomTitle = global.departmentheadDept + ' Department Meeting Room';
           meetingRoom.roomId =
               'depthead' + global.profile.member.branch.branchId.toString();
           meetingRooms.add(meetingRoom);

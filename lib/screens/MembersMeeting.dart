@@ -132,7 +132,7 @@ var discipleshipTraining;
 
     if(global.profile.member.zone.zoneId!=null){
       meetingRoom = new MeetingRooms();
-      meetingRoom.roomTitle = global.profile.member.zone.zoneName + ' Meeting Room';
+      meetingRoom.roomTitle = global.profile.member.zone.zoneName + ' Zone Meeting Room';
       meetingRoom.roomId ='zonemeet'+ global.profile.member.zone.zoneId.toString();
       meetingRooms.add(meetingRoom);
 
@@ -147,7 +147,7 @@ var discipleshipTraining;
 
       global.profile.deptTable.forEach((f){
         meetingRoom = new MeetingRooms();
-      meetingRoom.roomTitle = f.department + ' Meeting Room';
+      meetingRoom.roomTitle = f.department + ' Department Meeting Room';
       var deptID =f.department.replaceAll(" ", "");
       meetingRoom.roomId = deptID + global.profile.member.branch.branchId.toString();
       meetingRooms.add(meetingRoom);

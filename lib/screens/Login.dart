@@ -4,6 +4,7 @@ import 'package:dcapp/screens/SplashScreen.dart';
 import 'package:dcapp/services/BranchHeadServ.dart';
 import 'package:dcapp/services/DeptHeadServ.dart';
 import 'package:dcapp/services/ProfileServ.dart';
+import 'package:dcapp/services/UserServ.dart';
 import 'package:dcapp/services/branchServ.dart';
 import 'package:dcapp/services/memberServ.dart';
 import 'package:dcapp/services/zoneServ.dart';
@@ -28,6 +29,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController _getPassword = TextEditingController();
 
   List<Details> detailList;
   int count = 0;
@@ -36,14 +38,15 @@ class _LoginState extends State<Login> {
 
   String _email;
   String _password;
+  String getEmail;
 
   Future<bool> checkconnectivity() async {
     try {
       final result = await InternetAddress.lookup("google.com");
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         return true;
-      }else{
-         return false;
+      } else {
+        return false;
       }
     } on SocketException catch (_) {
       return false;
@@ -70,15 +73,16 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 Text(
                   str,
-                  style: TextStyle(fontSize: 14, color: Colors.blue.shade900),
+                  style: TextStyle(fontSize: 10, color: Colors.blue.shade900),
                 ),
                 SizedBox(
                   height: 10.0,
                 ),
                 GestureDetector(
-                   onTap: () {
-                            Navigator.pop(context);
-                          },
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: Container(
                     height: 40.0,
                     child: Material(
@@ -342,15 +346,20 @@ class _LoginState extends State<Login> {
                   Container(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height / 20,
-                        left: MediaQuery.of(context).size.width / 2),
-                    child: InkWell(
-                      child: Text(
-                        'Forgot Password ',
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width / 22,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
+                        left: MediaQuery.of(context).size.width / 2,
+                        right: 30.0),
+                    child: RaisedButton(
+                      color: Colors.white,
+                      onPressed: () {_showDialog();},
+                      child: InkWell(
+                        child: Text(
+                          'Resend Credentials',
+                          style: TextStyle(
+                            fontSize:12,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
                         ),
                       ),
                     ),
@@ -363,12 +372,13 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: RaisedButton(
                       elevation: 5.0,
-                      onPressed: ()async {
-                         bool res = await checkconnectivity();
+                      onPressed: () async {
+                        bool res = await checkconnectivity();
                         if (!res) {
-                         dialog("Internet Required, Check your Network Connection");
+                          dialog(
+                              "Internet Required, Check your Network Connection");
                           return;
-                           }
+                        }
                         if (_formKey.currentState.validate()) {
                           //Authenticate Login from Server
                           new Future.delayed(Duration.zero, () {
@@ -511,6 +521,72 @@ class _LoginState extends State<Login> {
             ),
           ),
         ]));
+  }
+
+  _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Enter Registered Email"),
+         content: Column(
+           mainAxisSize: MainAxisSize.min,
+           
+           crossAxisAlignment: CrossAxisAlignment.stretch,
+           children: <Widget>[
+             TextField(
+                  controller: _getPassword,
+                  decoration: InputDecoration(hintText: "Enter email"),
+                  onChanged: (String value) {
+                        getEmail = value;
+
+                  },
+                ),
+                
+                
+               
+           ],
+         ),
+            
+          actions: <Widget>[
+
+            // usually buttons at the bottom of the dialog
+            
+                   
+                    
+            new RaisedButton(
+              
+              color: Colors.blue.shade900,
+              child: new Text("Request Credentials"),
+              onPressed: () {
+
+                //save to server
+                 new Future.delayed(Duration.zero, () {
+                  loader('Requesting Credentials...');
+                    UserService.getCredentials(getEmail).then((response){
+                        if(response==1){
+                          dialog("Your credentials has been sent to your registered phone number");
+                          //Navigator.pop(context);
+                        }else{
+                          dialog("This email is not registered on our database");
+                         // Navigator.pop(context);
+                        }
+                    });
+                   
+                 });
+                   
+              
+              },
+              
+            ),
+            
+          ],
+          
+        );
+      },
+    );
   }
 
 //void _delete (BuildContext context, Details  details) async{

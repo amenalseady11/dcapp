@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
   int branchID;
   int zoneID;
   int memberId;
-  bool formValid =true;
+  bool formValid = true;
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
@@ -72,10 +72,10 @@ class _SignUpState extends State<SignUp> {
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   List<Details> detailList;
   int count = 0;
-   
+
   var filteredZones = List();
   List<BranchClass> filteredBranches = List();
   var filteredMembers = List();
@@ -154,22 +154,18 @@ final _formKey = GlobalKey<FormState>();
     }
   }
 
-
-
-
- Future<bool> checkconnectivity() async {
+  Future<bool> checkconnectivity() async {
     try {
       final result = await InternetAddress.lookup("google.com");
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         return true;
-      }else{
-         return false;
+      } else {
+        return false;
       }
     } on SocketException catch (_) {
       return false;
     }
   }
-
 
   Future<bool> loader(String str) {
     return showDialog(
@@ -197,9 +193,9 @@ final _formKey = GlobalKey<FormState>();
                   height: 10.0,
                 ),
                 GestureDetector(
-                   onTap: () {
-                            Navigator.pop(context);
-                          },
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Container(
                     height: 40.0,
                     child: Material(
@@ -220,29 +216,27 @@ final _formKey = GlobalKey<FormState>();
                 ),
               ],
             )));
-
-
   }
-    @override
+
+  @override
   void initState() {
     super.initState();
-      new Future.delayed(Duration.zero, () async {
+    new Future.delayed(Duration.zero, () async {
       bool res = await checkconnectivity();
       if (!res) {
         dialog("Internet Required, Check your Network Connection");
 
         return;
       }
-    setState(() {
-      filteredBranches = global.branches;
-       zn = global.zones;
-      filteredZones = zn;
-       _memberClass = global.members;
-       filteredMembers = _memberClass.members;
-    });
+      setState(() {
+        filteredBranches = global.branches;
+        zn = global.zones;
+        filteredZones = zn;
+        _memberClass = global.members;
+        filteredMembers = _memberClass.members;
       });
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -251,12 +245,9 @@ final _formKey = GlobalKey<FormState>();
     }
     return Scaffold(
         drawer: AppDrawer(),
-        body: ListView(
-          shrinkWrap: true,
-          
-          children: <Widget>[
+        body: ListView(shrinkWrap: true, children: <Widget>[
           Container(
-            padding: EdgeInsets.only(bottom:40),
+            padding: EdgeInsets.only(bottom: 40),
             decoration: BoxDecoration(
               color: Colors.blue.shade900,
               gradient: LinearGradient(
@@ -265,7 +256,6 @@ final _formKey = GlobalKey<FormState>();
                 colors: [Colors.white, Colors.blue.shade900],
               ),
             ),
-           
             child: Form(
               key: _formKey,
               child: Column(
@@ -286,16 +276,18 @@ final _formKey = GlobalKey<FormState>();
                       )
                     ],
                   ),
-                    SizedBox(height:15),
+                  SizedBox(height: 15),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                   
-                    children:<Widget>[
-                    Text("Fields marked with (*) are mandatory fields", style:TextStyle(fontWeight: FontWeight.bold,color:Colors.red,fontSize:14))
-                  ]),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Fields marked with (*) are mandatory fields",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                fontSize: 14))
+                      ]),
                   SizedBox(height: 20.0),
-                 
-                       Container(
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -303,9 +295,12 @@ final _formKey = GlobalKey<FormState>();
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                            Text(
+                              Text(
                                 '*',
-                                style: TextStyle(fontWeight:FontWeight.bold, color:Colors.red,fontSize:18),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 18),
                               ),
                               Text(
                                 'First Name',
@@ -320,11 +315,11 @@ final _formKey = GlobalKey<FormState>();
                             height: 60.0,
                             child: TextFormField(
                               validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "Fill Required Space";
-                                  }
-                                  return null;
-                                },
+                                if (value.isEmpty) {
+                                  return "Fill Required Space";
+                                }
+                                return null;
+                              },
                               controller: firstNameController,
                               keyboardType: TextInputType.text,
                               style: TextStyle(
@@ -345,8 +340,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -362,7 +357,6 @@ final _formKey = GlobalKey<FormState>();
                             decoration: kBoxDecorationStyle,
                             height: 60.0,
                             child: TextFormField(
-                              
                               controller: middleNameController,
                               keyboardType: TextInputType.text,
                               style: TextStyle(
@@ -383,9 +377,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -395,7 +388,10 @@ final _formKey = GlobalKey<FormState>();
                             children: <Widget>[
                               Text(
                                 '*',
-                                style: TextStyle(fontWeight:FontWeight.bold, color:Colors.red,fontSize:18),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 18),
                               ),
                               Text(
                                 'Last Name',
@@ -409,12 +405,12 @@ final _formKey = GlobalKey<FormState>();
                             decoration: kBoxDecorationStyle,
                             height: 60.0,
                             child: TextFormField(
-                               validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "Fill Required Space";
-                                  }
-                                  return null;
-                                },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Fill Required Space";
+                                }
+                                return null;
+                              },
                               controller: surNameController,
                               keyboardType: TextInputType.text,
                               style: TextStyle(
@@ -435,9 +431,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -449,29 +444,27 @@ final _formKey = GlobalKey<FormState>();
                           ),
                           SizedBox(height: 10.0),
                           Row(children: <Widget>[
-                                  Expanded(
-                                      child: ListTile(
-                                    title:
-                                        Text('Male', textAlign: TextAlign.left),
-                                    trailing: Radio(
-                                        value: 'Male',
-                                        groupValue: groupValue,
-                                        onChanged: (e) => valueChanged(e)),
-                                  )),
-                                  Expanded(
-                                      child: ListTile(
-                                    title:
-                                        Text('Female', textAlign: TextAlign.left),
-                                    trailing: Radio(
-                                        value: 'Female',
-                                        groupValue: groupValue,
-                                        onChanged: (e) => valueChanged(e)),
-                                  )),
-                                ]),
+                            Expanded(
+                                child: ListTile(
+                              title: Text('Male', textAlign: TextAlign.left),
+                              trailing: Radio(
+                                  value: 'Male',
+                                  groupValue: groupValue,
+                                  onChanged: (e) => valueChanged(e)),
+                            )),
+                            Expanded(
+                                child: ListTile(
+                              title: Text('Female', textAlign: TextAlign.left),
+                              trailing: Radio(
+                                  value: 'Female',
+                                  groupValue: groupValue,
+                                  onChanged: (e) => valueChanged(e)),
+                            )),
+                          ]),
                         ],
                       )),
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -481,7 +474,10 @@ final _formKey = GlobalKey<FormState>();
                             children: <Widget>[
                               Text(
                                 '*',
-                                style: TextStyle(fontWeight:FontWeight.bold, color:Colors.red,fontSize:18),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 18),
                               ),
                               Text(
                                 'Date of Birth',
@@ -495,12 +491,12 @@ final _formKey = GlobalKey<FormState>();
                             decoration: kBoxDecorationStyle,
                             height: 60.0,
                             child: TextFormField(
-                               validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "Fill Required Space";
-                                  }
-                                  return null;
-                                },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Fill Required Space";
+                                }
+                                return null;
+                              },
                               readOnly: true,
                               controller: dobController,
                               keyboardType: TextInputType.text,
@@ -518,15 +514,15 @@ final _formKey = GlobalKey<FormState>();
                                 hintText: 'Date of Birth',
                                 hintStyle: kHintTextStyle,
                               ),
-                               onTap: () {
-                                   _selectDate(context);
-                                },
+                              onTap: () {
+                                _selectDate(context);
+                              },
                             ),
                           ),
                         ],
                       )),
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -559,15 +555,13 @@ final _formKey = GlobalKey<FormState>();
                                 hintText: 'Date Joined',
                                 hintStyle: kHintTextStyle,
                               ),
-                               onTap: () {
-                                  _selectDatejoined(context);
-                                },
+                              onTap: () {
+                                _selectDatejoined(context);
+                              },
                             ),
                           ),
                         ],
                       )),
-
-
                   SizedBox(
                     height: 10,
                   ),
@@ -586,8 +580,7 @@ final _formKey = GlobalKey<FormState>();
                             alignment: Alignment.centerLeft,
                             decoration: kBoxDecorationStyle,
                             height: 60.0,
-                            child:  DropdownButton(
-                              
+                            child: DropdownButton(
                               hint: Text(
                                   'Marital Status'), // Not necessary for Option 1
                               value: _selectedStatus,
@@ -609,15 +602,12 @@ final _formKey = GlobalKey<FormState>();
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   color: Colors.black54),
-                                  
                             ),
-
                           ),
                         ],
                       )),
-
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -650,15 +640,15 @@ final _formKey = GlobalKey<FormState>();
                                 hintText: 'Wedding Anniversary',
                                 hintStyle: kHintTextStyle,
                               ),
-                               onTap: () {
-                                   _selectDatewedding(context);
-                                },
+                              onTap: () {
+                                _selectDatewedding(context);
+                              },
                             ),
                           ),
                         ],
                       )),
-                        SizedBox(height:10),
-                         Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -668,7 +658,10 @@ final _formKey = GlobalKey<FormState>();
                             children: <Widget>[
                               Text(
                                 '*',
-                                style: TextStyle(fontWeight:FontWeight.bold, color:Colors.red,fontSize:18),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 18),
                               ),
                               Text(
                                 'Email',
@@ -683,12 +676,13 @@ final _formKey = GlobalKey<FormState>();
                             height: 60.0,
                             child: TextFormField(
                               validator: (value) {
-                              final bool isValid = EmailValidator.validate(value);
-                                if(!isValid){
-                               return "Enter a valid Email";
-                               }
-                                  return null;
-                                },
+                                final bool isValid =
+                                    EmailValidator.validate(value);
+                                if (!isValid) {
+                                  return "Enter a valid Email";
+                                }
+                                return null;
+                              },
                               controller: emailController,
                               keyboardType: TextInputType.emailAddress,
                               style: TextStyle(
@@ -709,8 +703,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-                       SizedBox(height:10),
-                         Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -720,7 +714,10 @@ final _formKey = GlobalKey<FormState>();
                             children: <Widget>[
                               Text(
                                 '*',
-                                style: TextStyle(fontWeight:FontWeight.bold, color:Colors.red,fontSize:18),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 18),
                               ),
                               Text(
                                 'Phone Number',
@@ -734,12 +731,12 @@ final _formKey = GlobalKey<FormState>();
                             decoration: kBoxDecorationStyle,
                             height: 60.0,
                             child: TextFormField(
-                               validator: (value) {
-                                  if (value.isEmpty) {
-                                    return "Fill Required Space";
-                                  }
-                                  return null;
-                                },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Fill Required Space";
+                                }
+                                return null;
+                              },
                               controller: phoneController,
                               keyboardType: TextInputType.text,
                               style: TextStyle(
@@ -760,8 +757,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-                      SizedBox(height:10),
-                         Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -797,8 +794,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-                       SizedBox(height:10),
-                         Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -834,8 +831,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -871,8 +868,8 @@ final _formKey = GlobalKey<FormState>();
                           ),
                         ],
                       )),
-                      SizedBox(height:10),
-                       Container(
+                  SizedBox(height: 10),
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -882,7 +879,10 @@ final _formKey = GlobalKey<FormState>();
                             children: <Widget>[
                               Text(
                                 '*',
-                                style: TextStyle(fontWeight:FontWeight.bold, color:Colors.red,fontSize:18),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                    fontSize: 18),
                               ),
                               Text(
                                 'Select Branch',
@@ -894,123 +894,116 @@ final _formKey = GlobalKey<FormState>();
                           Container(
                             alignment: Alignment.centerLeft,
                             decoration: kBoxDecorationStyle,
-                            
                             height: 68.0,
-                            child:  
-                            SearchableDropdown.single(
-                              
-                                      items: filteredBranches
-                                          .map((value) => DropdownMenuItem(
-                                                child: Text(value.branchName),
-                                                value: value.branchID,
-                                              ))
-                                          .toList(),
-                                        
-                                      onChanged: (int value) {
-                                        setState(() {
-                                          branchID = value;
-                                          filteredZones = zn
-                                              .where((u) =>
-                                                  (u.branch.branchId == branchID))
-                                              .toList();
-                                        });
-                                      },
-                                      isExpanded: false,
-                                      
-                                      hint: Text('Select  Branch'),
-                                    ),
+                            child: SearchableDropdown.single(
+                              items: filteredBranches
+                                  .map((value) => DropdownMenuItem(
+                                        child: Text(value.branchName),
+                                        value: value.branchID,
+                                      ))
+                                  .toList(),
+                              onChanged: (int value) {
+                                setState(() {
+                                  branchID = value;
+                                  filteredZones = zn
+                                      .where((u) =>
+                                          (u.branch.branchId == branchID))
+                                      .toList();
+                                });
+                              },
+                              isExpanded: false,
+                              hint: Text('Select  Branch'),
+                            ),
                           ),
                         ],
                       )),
-                       filteredBranches != null
-                                ? 
-                       Container(
-                      padding:
-                          EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
+                  filteredBranches != null
+                      ? Container(
+                          padding: EdgeInsets.only(
+                              top: 35.0, left: 20.0, right: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                '*',
-                                style: TextStyle(fontWeight:FontWeight.bold, color:Colors.red,fontSize:18),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    '*',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red,
+                                        fontSize: 18),
+                                  ),
+                                  Text(
+                                    'Select Zone',
+                                    style: kLabelStyle,
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'Select Zone',
-                                style: kLabelStyle,
+                              SizedBox(height: 10.0),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                decoration: kBoxDecorationStyle,
+                                height: 68.0,
+                                child: SearchableDropdown.single(
+                                    hint: Text('Select Zone'),
+                                    isExpanded: false,
+                                    items: filteredZones
+                                        .map((value) => DropdownMenuItem(
+                                              child: Text(value.zoneName),
+                                              value: value.zoneId,
+                                            ))
+                                        .toList(),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        zoneID = newValue;
+                                      });
+                                    }),
                               ),
                             ],
-                          ),
-                          SizedBox(height: 10.0),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            decoration: kBoxDecorationStyle,
-                            height: 68.0,
-                            child:  
-                            SearchableDropdown.single(
-                                          hint: Text('Select Zone'),
-                                          isExpanded: false,
-                                          items: filteredZones
-                                              .map((value) => DropdownMenuItem(
-                                                    child: Text(value.zoneName),
-                                                    value: value.zoneId,
-                                                  ))
-                                              .toList(),
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              zoneID = newValue;
-                                            });
-                                          }),
-                          ),
-                        ],
-                      ))
+                          ))
                       : Container(),
-
-                      SizedBox(height:10),
-                        filteredBranches != null
-                                ?
-                       Container(
-                      padding:
-                          EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Invited By',
-                            style: kLabelStyle,
-                          ),
-                          SizedBox(height: 10.0),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            decoration: kBoxDecorationStyle,
-                            height: 68.0,
-                            child:  
-                            SearchableDropdown.single(
-                                          hint: Text('Invited By'),
-                                          isExpanded: false,
-                                          items: filteredMembers
-                                              .where((u) =>
-                                                  (u.branch.branchId == branchID))
-                                              .toList()
-                                              .map((value) => DropdownMenuItem(
-                                                    child: Text(value.firstName +
-                                                        " " +
-                                                        value.surName),
-                                                    value: value.memberId,
-                                                  ))
-                                              .toList(),
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              memberId = newValue;
-                                            });
-                                          }),
-                          ),
-                        ],
-                      ))
+                  SizedBox(height: 10),
+                  filteredBranches != null
+                      ? Container(
+                          padding: EdgeInsets.only(
+                              top: 35.0, left: 20.0, right: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Invited By',
+                                style: kLabelStyle,
+                              ),
+                              SizedBox(height: 10.0),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                decoration: kBoxDecorationStyle,
+                                height: 68.0,
+                                child: SearchableDropdown.single(
+                                    hint: Text('Invited By'),
+                                    isExpanded: false,
+                                    items: filteredMembers
+                                        .where((u) =>
+                                            (u.branch.branchId == branchID))
+                                        .toList()
+                                        .map((value) => DropdownMenuItem(
+                                              child: Text(value.firstName +
+                                                  " " +
+                                                  value.surName),
+                                              value: value.memberId,
+                                            ))
+                                        .toList(),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        memberId = newValue;
+                                      });
+                                    }),
+                              ),
+                            ],
+                          ))
                       : Container(),
                   SizedBox(height: 10.0),
-                   Container(
+                  Container(
                       padding:
                           EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
                       child: Column(
@@ -1025,154 +1018,165 @@ final _formKey = GlobalKey<FormState>();
                             alignment: Alignment.centerLeft,
                             decoration: kBoxDecorationStyle,
                             height: 68.0,
-                            child:  
-                            Checkbox(
-                                    value: isChecked,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        isChecked = value;
-                                      });
-                                    }),
+                            child: Checkbox(
+                                value: isChecked,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    isChecked = value;
+                                  });
+                                }),
                           ),
                         ],
                       )),
-                      
-                 
                   SizedBox(
                     height: 30.0,
                   ),
-                  Text(formValid? '': 'Please fill all mandatory field', style: TextStyle(color:Colors.red,fontWeight:FontWeight.bold),),
+                  Text(
+                    formValid ? '' : 'Please fill all mandatory field',
+                    style: TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold),
+                  ),
                   Container(
                     padding: EdgeInsets.all(15),
                     width: double.infinity,
                     child: RaisedButton(
                       elevation: 5.0,
                       onPressed: () async {
-                         bool res = await checkconnectivity();
+                        bool res = await checkconnectivity();
                         if (!res) {
-                         dialog("Internet Required, Check your Network Connection");
+                          dialog(
+                              "Internet Required, Check your Network Connection");
                           return;
-                           }
-                        if (_formKey.currentState.validate()){
-                          if(branchID==null || zoneID== null){
+                        }
+                        if (_formKey.currentState.validate()) {
+                          if (branchID == null || zoneID == null) {
                             setState(() {
-                               formValid=false;
+                              formValid = false;
                             });
                             dialog("Please Select Branch and Zone");
                             return;
                           }
                           setState(() {
-                             formValid=true;
+                            formValid = true;
                           });
-                         
-                        //Authenticate Login from Server
-                        new Future.delayed(Duration.zero, () {
-                          loader('Creating Account....');
-                                     MemberService.signUp(
-                                                firstNameController.text,
-                                                middleNameController.text,
-                                                surNameController.text,
-                                                addressController.text,
-                                                cityController.text,
-                                                countryController.text,
-                                                stateController.text,
-                                                phoneController.text,
-                                                emailController.text,
-                                                DateTime.parse(
-                                                    dobController.text),
-                                                groupValue,
-                                                _selectedStatus,
-                                                DateTime.parse(
-                                                    anniversaryController.text==""?DateTime.now().toString():anniversaryController.text ),
-                                                memberId,
-                                                noteController.text,
-                                                "Active",
-                                                isChecked,
-                                                DateTime.parse(
-                                                    datejoinedController.text==""? DateTime.now().toString():datejoinedController.text),
-                                                'images/Male.jpg',
-                                                branchID,
-                                                zoneID)
-                                            .then((responseFromServer) {
-                                          setState(() {
-                                            serverResponse = responseFromServer;
-                                            if (serverResponse.id >0) {
-                                             
-                                              Navigator.pop(context);
-                                              dialog('Registration Successful');
 
-                                              var username=  serverResponse.registrationResponse.email;
-                                              var password = serverResponse.registrationResponse.password;
-
-                                              Navigator.pop(context);
-                                               new Future.delayed(Duration.zero, () {
-                            loader('Authenticating....');
-
-                            ProfileService.authenticate(
-                                    username,
-                                    password)
-                                .then((profileFromServer) {
+                          //Authenticate Login from Server
+                          new Future.delayed(Duration.zero, () {
+                            loader('Creating Account....');
+                            MemberService.signUp(
+                                    firstNameController.text,
+                                    middleNameController.text,
+                                    surNameController.text,
+                                    addressController.text,
+                                    cityController.text,
+                                    countryController.text,
+                                    stateController.text,
+                                    phoneController.text,
+                                    emailController.text,
+                                    DateTime.parse(dobController.text),
+                                    groupValue,
+                                    _selectedStatus,
+                                    DateTime.parse(
+                                        anniversaryController.text == ""
+                                            ? DateTime.now().toString()
+                                            : anniversaryController.text),
+                                    memberId,
+                                    noteController.text,
+                                    "Active",
+                                    isChecked,
+                                    DateTime.parse(
+                                        datejoinedController.text == ""
+                                            ? DateTime.now().toString()
+                                            : datejoinedController.text),
+                                    'images/Male.jpg',
+                                    branchID,
+                                    zoneID)
+                                .then((responseFromServer) {
                               setState(() {
-                                global.profile = profileFromServer;
-                                if (global.profile.status == "Success") {
-                                   SharedPreferences.getInstance().then((ss) {
-                                    ss.setString(
-                                        'Username', username);
-                                    ss.setString(
-                                        "Password", password);
-                                  });
-                                  RoleActionService
-                                          .getRolesMemberbyMemberId(
-                                              profileFromServer
-                                                  .member.memberId)
-                                      .then((roleFromServer) {
-                                    setState(() {
-                                      global.roles = roleFromServer.roles;
-                                      
-                                  
-                                    });
-
-                                      BranchHeadService.checkifBranchHead(profileFromServer
-                                                  .member.memberId)
-                                      .then((response) {
-                                           global.checkifbranchhead = response;
-                                           
-
-                                      });
-                                        ZoneHeadService.checkifzone(profileFromServer
-                                                  .member.memberId)
-                                      .then((response) {
-                                           global.checkifzonehead = response;
-
-                                      });
-                                      DepartmentHeadService.checkifdepthead(profileFromServer
-                                                  .member.memberId)
-                                      .then((response) {
-                                           global.checkifdepthhead = response.status;
-                                             global.departmentheadDept = response.department;
-                                      });
-                                  });
-                                  Navigator.pushReplacement(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return Home();
-                                  }));
-                                } else {
-                                  dialog("Invalid Login Credentials");
+                                serverResponse = responseFromServer;
+                                if (serverResponse.id > 0) {
                                   Navigator.pop(context);
+                                  dialog('Registration Successful');
+
+                                  var username =
+                                      serverResponse.registrationResponse.email;
+                                  var password = serverResponse
+                                      .registrationResponse.password;
+
+                                  Navigator.pop(context);
+                                  new Future.delayed(Duration.zero, () {
+                                    loader('Authenticating....');
+
+                                    ProfileService.authenticate(
+                                            username, password)
+                                        .then((profileFromServer) {
+                                      setState(() {
+                                        global.profile = profileFromServer;
+                                        if (global.profile.status ==
+                                            "Success") {
+                                          SharedPreferences.getInstance()
+                                              .then((ss) {
+                                            ss.setString('Username', username);
+                                            ss.setString("Password", password);
+                                          });
+                                          RoleActionService
+                                                  .getRolesMemberbyMemberId(
+                                                      profileFromServer
+                                                          .member.memberId)
+                                              .then((roleFromServer) {
+                                            setState(() {
+                                              global.roles =
+                                                  roleFromServer.roles;
+                                            });
+
+                                            BranchHeadService.checkifBranchHead(
+                                                    profileFromServer
+                                                        .member.memberId)
+                                                .then((response) {
+                                              global.checkifbranchhead =
+                                                  response;
+                                            });
+                                            ZoneHeadService.checkifzone(
+                                                    profileFromServer
+                                                        .member.memberId)
+                                                .then((response) {
+                                              global.checkifzonehead = response;
+                                            });
+                                            DepartmentHeadService
+                                                    .checkifdepthead(
+                                                        profileFromServer
+                                                            .member.memberId)
+                                                .then((response) {
+                                              global.checkifdepthhead =
+                                                  response.status;
+                                              global.departmentheadDept =
+                                                  response.department;
+                                            });
+                                          });
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return Home();
+                                          }));
+                                        } else {
+                                          dialog("Invalid Login Credentials");
+                                          Navigator.pop(context);
+                                        }
+                                      });
+                                    });
+                                  });
+                                }else if(serverResponse.status=='Email Already Exist'){
+                                     dialog("We noticed you've used this email to signup, your credentials has been sent to your registerd number");
+                                          Navigator.pop(context);
                                 }
                               });
-                               });
-                                });
-                                            }
-                                          });
-                                        });
-                         
-                        });
-                      }else{
-                         setState(() {
-                               formValid=false;
                             });
-                      }
+                          });
+                        } else {
+                          setState(() {
+                            formValid = false;
+                          });
+                        }
                       },
                       padding: EdgeInsets.all(15.0),
                       shape: RoundedRectangleBorder(
@@ -1196,22 +1200,17 @@ final _formKey = GlobalKey<FormState>();
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      
-                    ],
+                    children: <Widget>[],
                   ),
-                 
                 ],
               ),
             ),
-            
-            
           ),
           Container()
         ]));
   }
 
- valueChanged(e) {
+  valueChanged(e) {
     setState(() {
       if (e == "Male") {
         groupValue = e;

@@ -70,7 +70,7 @@ class _ZoneHead extends State<ZoneHead>{
           global.zoneHead = zoneheadFromServer;
           global.zoneHead.zoneHeads.removeWhere((item) => item.zone.zoneName == null);
           zoneheads= global.zoneHead.zoneHeads;
-          filteredZoneHeads = zoneheads;
+          filteredZoneHeads = zoneheads.where((c)=>c.zone.branch.branchId == global.profile.member.branch.branchId).toList();
          Navigator.pop(context);
         });
       });
@@ -375,7 +375,9 @@ class _ZoneHead extends State<ZoneHead>{
                    hint: Text('Select Zone'),
                    value: zoneID,
                     isExpanded: false,
-                  items: filteredZones.map((value) => DropdownMenuItem(
+                  items: filteredZones
+                  
+                  .map((value) => DropdownMenuItem(
                                 child: Text(value.zoneName),
                                 value: value.zoneId,
                               ))
@@ -384,6 +386,7 @@ class _ZoneHead extends State<ZoneHead>{
               setState(() {
                 zoneID = newValue;
                       Navigator.of(context).pop();
+                        _displayDialog(context);
                     
               });
             }

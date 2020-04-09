@@ -1,9 +1,11 @@
 import 'package:dcapp/classes/BranchClass.dart';
 import 'package:dcapp/classes/memberClass.dart';
 import 'package:dcapp/screens/MembersRegistration.dart';
-import 'package:dcapp/services/zoneServ.dart';
+import 'package:dcapp/services/MemberTrainingServ.dart';
+import 'package:dcapp/services/MembersDeptServ.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -60,13 +62,20 @@ class _MemberScreen extends State<MemberScreen> {
   String pictureUrl;
   int branchid;
   int zoneid;
+  int trainingId;
+  int deptId;
 
+
+var getmemberbranch = global.profile.member.branch.branchId;
   int serverResponse;
   List<MemberClass> members = List();
   var filteredMembers = List();
   var filteredZones = List();
+    var filteredDepts = List();
+   var filteredtrainings= List();
   MemberClass memb = new MemberClass();
-
+  
+      
   List<BranchClass> filteredBranches = List();
 
   Future<bool> loader(String str) {
@@ -129,8 +138,10 @@ class _MemberScreen extends State<MemberScreen> {
     super.initState();
     setState(() {
       memb = global.members;
-      filteredMembers = memb.members;
+       filteredDepts = global.department.departments.toList();
+      filteredMembers = memb.members.where((c)=>c.branch.branchId==global.profile.member.branch.branchId).toList();
       filteredZones = global.zones;
+      filteredtrainings = global.alltraining;
       filteredBranches = global.branches;
     });
   }
@@ -338,6 +349,7 @@ class _MemberScreen extends State<MemberScreen> {
                                                 ),
 
                                              child: Text(
+                                               
                                               filteredMembers[index].firstName +' ' +  filteredMembers[index].middleName +' ' +  filteredMembers[index].surName, textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -351,21 +363,53 @@ class _MemberScreen extends State<MemberScreen> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                        Column(children: <Widget>[
-                                          new Icon( Icons.call)
+                                        Column(
+                                        
+                                          children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              new IconButton
+                              (
+                                padding: EdgeInsets.only(left:0),
+                                icon: Icon(Icons.group_add,color: Colors.blue.shade900, size: 20,),
+                               onPressed: (){
+                                  global.membdetName = filteredMembers[index].surName + " " + filteredMembers[index].firstName.toString();
+                                  global.getmemberId = filteredMembers[index].memberId;
+                                 _displaydeptDialog(context);}
+                              ),
+                                            ],
+                                          ),
+                                             Row(children:<Widget>[
+                                         Text("Add to department", style: TextStyle(fontSize:10),),
+                                      ]),
                                             //Call Icon
                                         ],),
-                                        SizedBox(width:20),
+                                       
+                                        SizedBox(width:40),
                                          Column(children: <Widget>[
                                             //SMS Icon
-                                             new Icon( Icons.email)
-                                        ],),
-                                        SizedBox(width:20),
-                                         Column(children: <Widget>[
-                                            //SMS Icon
-                                             new Icon( Icons.sms)
-                                        ],),
+                                            Row(
+                                              children: <Widget>[
+                                                new IconButton
+                              (
+                                padding: EdgeInsets.only(left:0),
+                                icon: Icon(Icons.group_add,color: Colors.blue.shade900, size: 20,),
+                               onPressed: (){
+                                  global.membdetName = filteredMembers[index].surName + " " + filteredMembers[index].firstName.toString();
+                                  global.getmemberId = filteredMembers[index].memberId;
+                                 _displaytrainingDialog(context);},
+                              ),
+                                              ],
+                                            ),
+                                             Row(children: <Widget>[
+                                         Text("Add  trainings", style: TextStyle(fontSize:10),),
                                       ],)
+                                    
+                                        ],),
+                                      ],),
+                                     
+                                     
+
                                     ],
                                   ),
                                  
@@ -373,20 +417,32 @@ class _MemberScreen extends State<MemberScreen> {
                                   //Second Column
                                   Column(
                                     children: <Widget>[
-                                      Row(children: <Widget>[
-                                        Text(
-                                              'Phone Number', textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.bold,
-                                              fontSize: 12.0, fontFamily: 'Monseratti'),
-                                              
-                                              ),
-                                      ],),
-                                     
-                                       Row(children: <Widget>[
-                                        Column(
-                                          children: <Widget>[
+                                      // general column for phone number
+                                      Row(
+                                        children: <Widget>[
+                                          //column for icon
+                                          Column(children: <Widget>[
+                                            new IconButton
+                              (
+                                padding: EdgeInsets.only(left:0),
+                                icon: Icon(Icons.phone,color: Colors.green, size: 30,),
+                               onPressed: ()=> launch("tel:${filteredMembers[index].phoneNumber.toString()}"),
+                              ),
+                                          ],),
+                                          //column for phone detail
+                                          Column(
+                                            children: <Widget>[
+                                              Row(children: <Widget>[
+                                                Text(
+                                                      'Phone Number', textAlign: TextAlign.left,
+                                                      style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontWeight: FontWeight.bold,
+                                                      fontSize: 12.0, fontFamily: 'Monseratti'),
+                                                      
+                                                      ),
+                                              ],),
+                                                Row(children: <Widget>[
                                             Text(
                                                   filteredMembers[index].phoneNumber, textAlign: TextAlign.left,
                                                   style: TextStyle(
@@ -395,9 +451,13 @@ class _MemberScreen extends State<MemberScreen> {
                                                   fontSize: 12.0, fontFamily: 'Monseratti'),
                                                   
                                                   ),
-                                          ],
-                                        ),
-                                      ],),
+                                          ],),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                     
+                                     
                                       
                                       SizedBox(height:10),
                                       Row(children: <Widget>[
@@ -489,4 +549,156 @@ class _MemberScreen extends State<MemberScreen> {
           ],
         ));
   }
+
+  
+  _displaytrainingDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Row(
+              children: <Widget>[
+                Text(global.membdetName),
+              ],
+            ),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                 SearchableDropdown.single(
+                 hint: Text('Add Training'),
+                   isExpanded: false,
+                   
+                  items: filteredtrainings
+                  
+                 .map((value) => DropdownMenuItem(
+                             child: Text(value.trainingName.toString()),
+                               value: value.trainingId,
+                             ))
+                    .toList(),
+                  onChanged: (newValue) {
+             setState(() {
+                
+               trainingId = newValue;
+              });
+             }
+                ),
+              ],
+            ),
+            
+            actions: <Widget>[
+              new RaisedButton(
+                color: Colors.blue.shade900,
+                child: new Text('Save'),
+                onPressed: () {
+                  
+                 new Future.delayed(Duration.zero, () {
+                  loader('Adding Member...');
+
+                  
+
+                    MembersTrainingService.postMembTraining(trainingId, global.getmemberId).then((responseFromServer) {
+                      
+                    setState(() {
+                    serverResponse = responseFromServer;
+                   if(serverResponse == 1){
+                         Navigator.pop(context);
+                    dialog('Record Added ');
+      
+                   }else{
+                       Navigator.pop(context);
+                    dialog('Error Adding Record');
+                   }
+                   
+                    });
+                   });
+                 });
+                }),
+
+              new RaisedButton(
+                color: Colors.grey,
+                child: new Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+                ]
+          );},
+          );
+        }
+
+
+
+   _displaydeptDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Row(
+              children: <Widget>[
+                Text(global.membdetName),
+              ],
+            ),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                 SearchableDropdown.single(
+                 hint: Text('Select Department'),
+                   isExpanded: false,
+                   
+                  items: filteredDepts
+                  
+                 .map((value) => DropdownMenuItem(
+                             child: Text(value.departmentName.toString()),
+                               value: value.departmentId,
+                             ))
+                    .toList(),
+                  onChanged: (newValue) {
+             setState(() {
+                
+               deptId = newValue;
+              });
+             }
+                ),
+              ],
+            ),
+            
+            actions: <Widget>[
+              new RaisedButton(
+                color: Colors.blue.shade900,
+                child: new Text('Save'),
+                onPressed: () {
+                 new Future.delayed(Duration.zero, () {
+                  loader('Adding Member...');
+                    MembersDepartmentService.postMembDept(global.profile.member.branch.branchId, deptId, global.getmemberId ).then((responseFromServer) {
+                      
+                    setState(() {
+                    serverResponse = responseFromServer;
+                   if(serverResponse == 1){
+                         Navigator.pop(context);
+                    dialog('Record Added ');
+      
+                   }else{
+                       Navigator.pop(context);
+                    dialog('Error Adding Record');
+                   }
+                   
+                    });
+                   });
+                 });
+                }),
+
+              new RaisedButton(
+                color: Colors.grey,
+                child: new Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+                ]
+          );},
+          );
+        }
+  
 }

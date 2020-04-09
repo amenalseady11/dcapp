@@ -158,7 +158,7 @@ return br[0].branchName;
 
 
                     ],),
-                    SizedBox(width: 20),
+                    SizedBox(width: 15),
                     //Second Column
                      Column(children: <Widget>[
 
@@ -186,7 +186,7 @@ return br[0].branchName;
                             Row(children: <Widget>[
                               //Value
                               Text(parseDate(global.profile.member.anniversary) , style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 12,
                                 color:Colors.black ,
                                  fontWeight: FontWeight.bold,
                               ),)
@@ -216,7 +216,7 @@ return br[0].branchName;
                             Row(children: <Widget>[
                               //Value
                               Text(getBranchName(global.profile.member.branch.branchId) ,  style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 12,
                                 color:Colors.black ,
                                  fontWeight: FontWeight.bold,
                               ),)
@@ -229,7 +229,7 @@ return br[0].branchName;
                             //Icon
                             CircleAvatar(child: Icon(Icons.home ) ,)
                           ],),
-                          SizedBox(width:10),
+                          SizedBox(width:2),
 
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -245,7 +245,7 @@ return br[0].branchName;
                             Row(children: <Widget>[
                               //Value
                               Text(global.profile.member.zone.zoneName , style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 10,
                                 color:Colors.black ,
                                  fontWeight: FontWeight.bold,
                               ),)

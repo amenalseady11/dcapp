@@ -245,7 +245,7 @@ Future<bool> dialog(str) {
                                return Branch();
                             }else{
                             //  dialog('Access Denied');
-                            return AccessDenied();
+                            return Branch();
                             }
                           }
                           else if(index == 1){
@@ -253,7 +253,7 @@ Future<bool> dialog(str) {
                                return BranchHead();
                             }else{
                               //  dialog('Access Denied');
-                            return AccessDenied();
+                            return BranchHead();
                             }
 
                            

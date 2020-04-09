@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "167394207242",
+    "firebase_url": "https://dominion-city-app.firebaseio.com",
+    "project_id": "dominion-city-app",
+    "storage_bucket": "dominion-city-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167394207242:android:f3c626da9eb2d8cb0c21f3",
+        "android_client_info": {
+          "package_name": "com.dominioncity.dcapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167394207242-burjtqrh8o2n7aujb0ukp95oscl2gta1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dominioncity.dcapp",
+            "certificate_hash": "f87f11509bf5b26656d1ecc43ea40a5650eed483"
+          }
+        },
+        {
+          "client_id": "167394207242-8f662p8fc6qq0h4e5qplsekmspnm67ob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlHl3MSrVhhl9MMdRRqq77gnBDyx2MVAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167394207242-8f662p8fc6qq0h4e5qplsekmspnm67ob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

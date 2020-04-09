@@ -597,115 +597,104 @@ class _FormTemplate extends State<FormTemplate> {
                           SizedBox(height: 20.0),
 
                           GestureDetector(
-                            onTap: (){
-                               new Future.delayed(Duration.zero, () {
-                                        loader('Saving Member...');
+                            onTap: () {
+                              new Future.delayed(Duration.zero, () {
+                                loader('Saving Member...');
 
-                                        MemberService.saveMembers(
-                                                firstNameController.text,
-                                                middleNameController.text,
-                                                surNameController.text,
-                                                addressController.text,
-                                                cityController.text,
-                                                countryController.text,
-                                                stateController.text,
-                                                phoneController.text,
-                                                emailController.text,
-                                                DateTime.parse(
-                                                    dobController.text),
-                                                groupValue,
-                                                _selectedStatus,
-                                                DateTime.parse(
-                                                    anniversaryController.text),
-                                                memberId,
-                                                noteController.text,
-                                                "Active",
-                                                isChecked,
-                                                DateTime.parse(
-                                                    datejoinedController.text),
-                                                'images/Male.jpg',
-                                                branchID,
-                                                zoneID)
-                                            .then((responseFromServer) {
-                                          setState(() {
-                                            serverResponse = responseFromServer;
-                                            if (serverResponse != null) {
-                                              MemClass.Member memb =
-                                                  new MemClass.Member();
+                                MemberService.saveMembers(
+                                        firstNameController.text,
+                                        middleNameController.text,
+                                        surNameController.text,
+                                        addressController.text,
+                                        cityController.text,
+                                        countryController.text,
+                                        stateController.text,
+                                        phoneController.text,
+                                        emailController.text,
+                                        DateTime.parse(dobController.text),
+                                        groupValue,
+                                        _selectedStatus,
+                                        DateTime.parse(
+                                            anniversaryController.text),
+                                        memberId,
+                                        noteController.text,
+                                        "Active",
+                                        isChecked,
+                                        DateTime.parse(
+                                            datejoinedController.text),
+                                        'images/Male.jpg',
+                                        branchID,
+                                        zoneID)
+                                    .then((responseFromServer) {
+                                  setState(() {
+                                    serverResponse = responseFromServer;
+                                    if (serverResponse != null) {
+                                      MemClass.Member memb =
+                                          new MemClass.Member();
 
-                                              int id = serverResponse;
-                                              memb.memberId = id;
-                                              memb.firstName =
-                                                  firstNameController.text;
-                                              memb.middleName =
-                                                  middleNameController.text;
-                                              memb.surName =
-                                                  surNameController.text;
-                                              memb.address =
-                                                  addressController.text;
-                                              memb.city = cityController.text;
-                                              memb.country =
-                                                  countryController.text;
-                                              memb.state = stateController.text;
+                                      int id = serverResponse;
+                                      memb.memberId = id;
+                                      memb.firstName = firstNameController.text;
+                                      memb.middleName =
+                                          middleNameController.text;
+                                      memb.surName = surNameController.text;
+                                      memb.address = addressController.text;
+                                      memb.city = cityController.text;
+                                      memb.country = countryController.text;
+                                      memb.state = stateController.text;
 
-                                              memb.phoneNumber =
-                                                  phoneController.text;
-                                              memb.emailAddress =
-                                                  emailController.text;
-                                              memb.dob = DateTime.parse(
-                                                  dobController.text);
-                                              memb.gender = groupValue;
-                                              memb.maritalStatus =
-                                                  _selectedStatus;
-                                              memb.anniversary = DateTime.parse(
-                                                  anniversaryController.text);
-                                              memb.invitedBy = memberId;
-                                              memb.note = noteController.text;
-                                              memb.status = "Active";
-                                              memb.guest = isChecked;
-                                              memb.dateJoined = DateTime.parse(
-                                                  datejoinedController.text);
-                                              memb.pictureUrl = 'images/Male.jpg';
+                                      memb.phoneNumber = phoneController.text;
+                                      memb.emailAddress = emailController.text;
+                                      memb.dob =
+                                          DateTime.parse(dobController.text);
+                                      memb.gender = groupValue;
+                                      memb.maritalStatus = _selectedStatus;
+                                      memb.anniversary = DateTime.parse(
+                                          anniversaryController.text);
+                                      memb.invitedBy = memberId;
+                                      memb.note = noteController.text;
+                                      memb.status = "Active";
+                                      memb.guest = isChecked;
+                                      memb.dateJoined = DateTime.parse(
+                                          datejoinedController.text);
+                                      memb.pictureUrl = 'images/Male.jpg';
 
-                                              MemClass.Branch br =
-                                                  new MemClass.Branch();
-                                              List<BranchClass> brL = global
-                                                  .branches
-                                                  .where((item) =>
-                                                      item.branchID == branchID)
-                                                  .toList();
+                                      MemClass.Branch br =
+                                          new MemClass.Branch();
+                                      List<BranchClass> brL = global.branches
+                                          .where((item) =>
+                                              item.branchID == branchID)
+                                          .toList();
 
-                                              br.branchId = branchID;
-                                              br.branchName = brL[0].branchName;
-                                              br.city = brL[0].city;
-                                              br.country = brL[0].country;
-                                              br.parentId = brL[0].parentId;
-                                              br.status = brL[0].status;
+                                      br.branchId = branchID;
+                                      br.branchName = brL[0].branchName;
+                                      br.city = brL[0].city;
+                                      br.country = brL[0].country;
+                                      br.parentId = brL[0].parentId;
+                                      br.status = brL[0].status;
 
-                                              memb.branch = br;
+                                      memb.branch = br;
 
-                                              MemClass.Zone z =
-                                                  new MemClass.Zone();
-                                              List<ZoneClass> zL = global.zones
-                                                  .where((item) =>
-                                                      item.zoneId == zoneID)
-                                                  .toList();
+                                      MemClass.Zone z = new MemClass.Zone();
+                                      List<ZoneClass> zL = global.zones
+                                          .where(
+                                              (item) => item.zoneId == zoneID)
+                                          .toList();
 
-                                              z.zoneId = zoneID;
-                                              z.zoneName = zL[0].zoneName;
-                                              z.adress = zL[0].adress;
-                                              z.branch = br;
+                                      z.zoneId = zoneID;
+                                      z.zoneName = zL[0].zoneName;
+                                      z.adress = zL[0].adress;
+                                      z.branch = br;
 
-                                              memb.zone = z;
-                                              global.members.members.add(memb);
-                                              filteredZones = global.zones;
-                                              Navigator.pop(context);
-                                              dialog('Member Saved');
-                                            }
-                                          });
-                                        });
-                                      });
-
+                                      memb.zone = z;
+                                      global.members.members.add(memb);
+                                      filteredZones = global.zones;
+                                      Navigator.pop(context);
+                                      dialog('Member Saved');
+                                    }
+                                  });
+                                });
+                              });
                             },
                             child: Container(
                               height: 40.0,
@@ -743,5 +732,4 @@ class _FormTemplate extends State<FormTemplate> {
       }
     });
   }
-
 }

@@ -244,7 +244,7 @@ class AppDrawer extends StatelessWidget {
                         getAction( Icons.dashboard, 'Dashboard', Dashboard(), 'Y', 'N', 'N', context, 'Can View Dashboard'),
                         getAction( Icons.check_circle, 'Attendance', Attendance(), 'Y', 'Y', 'Y', context, 'Can Manage Attendance'),
                         getAction( Icons.message, 'Send SMS', SendSMS(), 'Y', 'N', 'N', context, 'Can Send SMS'),
-                        getAction( Icons.message, 'Send Email', null, 'Y', 'N', 'N', context, 'Can Send Email'),
+                        getAction( Icons.message, 'Send Email', Dashboard(), 'Y', 'N', 'N', context, 'Can Send Email'),
                         getAction( Icons.people, 'Manage Members', MemberScreen(), 'Y', 'Y', 'Y', context, 'Can View Members'),
                         getAction( Icons.group_add, 'Manage MVP', MVP(), 'Y', 'N', 'N', context, 'Can Manage MVP'),
                         getAction( Icons.queue, 'View Prayer Requests', ManagePrayerRequest(), 'Y', 'N', 'N', context, 'Can Manage Prayer Request'),
@@ -270,13 +270,8 @@ class AppDrawer extends StatelessWidget {
                
                 CustomListTile(
                     Icons.lock,
-                    'Logout',
-                    () => {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                              return SplashScreen();
-                          }))
-                        }),
+                    'Exit App',
+                    () => exit(0)),
               ],
             ),
           )

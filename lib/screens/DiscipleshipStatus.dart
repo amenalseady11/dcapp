@@ -60,7 +60,7 @@ class _DiscipleshipStatus extends State<DiscipleshipStatus> {
             discipleclass = discipleFromServer;
             disc = discipleclass.discipleshipstatus;
             _memberClass = global.members;
-       filteredMembers = _memberClass.members;
+            filteredMembers = _memberClass.members;
             disc.removeWhere((item) => item.branch == null);
             disc.removeWhere((item) => item.memberName == null);
             alltraining = discipleclass.trainings;
@@ -445,31 +445,14 @@ class _DiscipleshipStatus extends State<DiscipleshipStatus> {
           return AlertDialog(
             title: Row(
               children: <Widget>[
-                Text(' Add Members to Department'),
+                Text(" Add Member's  Trainings"),
               ],
             ),
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                 SearchableDropdown.single(
-                 hint: Text('Select Training'),
-                   isExpanded: false,
-                   
-                  items: alltraining
-                  
-                 .map((value) => DropdownMenuItem(
-                             child: Text(value.trainingName.toString()),
-                               value: value.trainingId,
-                             ))
-                    .toList(),
-                  onChanged: (newValue) {
-             setState(() {
                 
-               trainingID = newValue;
-              });
-             }
-                ),
                 
                  SearchableDropdown.single(
                    hint: Text('Select Member'),
@@ -489,9 +472,24 @@ class _DiscipleshipStatus extends State<DiscipleshipStatus> {
                 memberID = newValue;
               });
             }
-                 
-                 
+                ),
+                 SearchableDropdown.single(
+                 hint: Text('Select Training'),
+                   isExpanded: false,
+                   
+                  items: alltraining
                   
+                 .map((value) => DropdownMenuItem(
+                             child: Text(value.trainingName.toString()),
+                               value: value.trainingId,
+                             ))
+                    .toList(),
+                  onChanged: (newValue) {
+             setState(() {
+                
+               trainingID = newValue;
+              });
+             }
                 ),
               ],
             ),

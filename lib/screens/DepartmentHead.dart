@@ -82,7 +82,7 @@ class _DepartmentHead extends State<DepartmentHead>{
           global.departmentHead = deptheadFromServer;
           global.departmentHead.departmentHeads.removeWhere((item) => item.department.departmentName == null);
           deptsHeads= global.departmentHead.departmentHeads;
-          filteredDeptHeads = deptsHeads;
+          filteredDeptHeads = deptsHeads.where((c)=>c.branch.branchId==global.profile.member.branch.branchId).toList();
          Navigator.pop(context);
         });
         

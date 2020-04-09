@@ -30,6 +30,26 @@ class UserService{
       throw Exception(e.toString());
     }
   }
+static Future <int> getCredentials(String email) async{
+
+ 
+    String url =   'http://apekflux-001-site1.btempurl.com/v2/api/members/getcredentials?email='+ email.toString();
+    try{
+      final response = await http.get(url,  headers: {'content-type' : 'application/json'});
+      if(response.statusCode==200){
+      // print(response.body);
+
+        int list = int.parse(response.body);
+        return list;
+      }else {
+       return 0;
+      }
+    }
+    catch(e){
+     return 0;
+    }
+  }
+
 
   static Future <int> updateUserPosition(int id, String position) async{
 
