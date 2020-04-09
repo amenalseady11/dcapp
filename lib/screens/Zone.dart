@@ -106,11 +106,22 @@ Future<bool> dialog(str){
   void initState() {
     super.initState();
     setState(() {
-     zn =global.zones;
-     filteredZones = zn.where((c)=>c.branch.branchId==global.profile.member.branch.branchId).toList();
-     filteredBranches=global.branches;
-     
-     
+   
+
+    new Future.delayed(Duration.zero, () {
+                  loader('Loading Zones...');
+      ZoneService.getZones().then((zonesFromServer) {
+        setState(() {
+            zn =global.zones;
+          filteredBranches=global.branches;
+          global.zones = zonesFromServer;
+        global.zones.removeWhere((item) => item.zoneName == null);
+        filteredZones = global.zones.where((c)=>c.branch.branchId==global.profile.member.branch.branchId).toList();
+           Navigator.pop(context);
+        });
+         });
+      });
+   
    });
   }
 
@@ -303,6 +314,14 @@ Future<bool> dialog(str){
                     setState(() {
                     serverResponse = responseFromServer;
                    if(serverResponse !=null){
+                      ZoneService.getZones().then((zonesFromServer) {
+        setState(() {
+          filteredBranches=global.branches;
+          global.zones = zonesFromServer;
+        global.zones.removeWhere((item) => item.zoneName == null);
+        filteredZones = global.zones.where((c)=>c.branch.branchId==global.profile.member.branch.branchId).toList();
+        });
+      });
                        Navigator.pop(context);
                     dialog('Zone Saved');
                    }
