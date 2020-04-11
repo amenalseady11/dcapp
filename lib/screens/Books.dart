@@ -125,7 +125,7 @@ class _BookPageState extends State<BookPage> {
 
   Future<File> createFileOfPdfUrl() async {
     String dir = (await getExternalStorageDirectory()).path + '/Books';
-    final filename = 'book' +
+    String filename = 'book' +
         global.bookId.toString() +
         '.pdf'; // url.substring(url.lastIndexOf("/") + 1);
     if (await File('$dir/$filename').exists()) {
@@ -176,12 +176,16 @@ class _BookPageState extends State<BookPage> {
           return file;
 
       } else {
-        new Directory('$dir').create()
+        Directory directory = await new Directory('$dir').create();
             // The created directory is returned as a Future.
-            .then((Directory directory) async {
+            
           Dio dio = new Dio();
 
-          await dio.download(url, '$directory/$filename',
+        filename = directory.path + '/book' +
+        global.bookId.toString() +
+        '.pdf';
+          String downloadPath = filename;//'$directory/$filename';
+          await dio.download(url, downloadPath,
           
               options:
                   Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),
@@ -206,12 +210,12 @@ class _BookPageState extends State<BookPage> {
              
             }
           });
-          File file = new File('$directory/$filename');
+          File file = new File(downloadPath);
           pr.hide().then((isHidden) {
           print(isHidden);
           });
           return file;
-        });
+        
       }
     }
   }

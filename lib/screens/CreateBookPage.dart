@@ -344,6 +344,7 @@ class _CreateBookPage extends State<CreateBookPage> {
                                                     item.author == null);
                                                 filteredBooks = _book;
                                               });
+                                              
                                               Navigator.pop(context);
                                               dialog('Book Posted');
                                             });

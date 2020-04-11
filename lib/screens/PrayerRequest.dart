@@ -6,6 +6,7 @@ import 'package:dcapp/classes/PrayerRequestClass.dart' as prayers;
 import 'package:dcapp/classes/DiscipleshipStatusClass.dart';
 
 import 'package:dcapp/screens/DiscipleshipTrainingDetail.dart';
+import 'package:dcapp/screens/Testimony.dart';
 import 'package:dcapp/services/PrayerRequestServ.dart';
 import 'package:intl/intl.dart';
 import 'package:dcapp/globals.dart' as global;
@@ -327,7 +328,9 @@ class _PrayerRequestPage extends State<PrayerRequestPage> {
                 color: Colors.blue,
                 child: new Text('Testify', style: TextStyle(color:Colors.white, fontWeight: FontWeight.bold),),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Testimony();
+                  }));
                 },
               ),
                               
