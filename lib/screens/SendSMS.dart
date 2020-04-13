@@ -21,7 +21,8 @@ class _SendSMS extends State<SendSMS>{
 
 TextEditingController smsController = new TextEditingController();
 String message;
- final List<String> categories = ["All Members", 
+ final List<String> categories = [
+   "All Members", 
  "All Males", 
   "All Females", 
   "All Zonal Leaders",

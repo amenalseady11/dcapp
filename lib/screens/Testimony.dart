@@ -316,18 +316,7 @@ class _Testimony extends State<Testimony> {
                                  
                                 ],
                               ),
-              //                 Spacer(),
-              //                Column(
-              //                  children:<Widget>[
-              //                     new RaisedButton(
-              //   color: Colors.blue,
-              //   child: new Text('Testify', style: TextStyle(color:Colors.white, fontWeight: FontWeight.bold),),
-              //   onPressed: () {
-              //     Navigator.of(context).pop();
-              //   },
-              // ),
-                              
-              //                     ])
+             
                             ],
                           ),
                           

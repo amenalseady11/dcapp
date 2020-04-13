@@ -1,18 +1,14 @@
 import 'package:dcapp/screens/Dashboard.dart';
 import 'package:dcapp/screens/ExpenditureType.dart';
-import 'package:dcapp/screens/IncomeType.dart';
+import 'package:dcapp/screens/G12Academy.dart';
 import 'package:dcapp/screens/ManageExpenditure.dart';
 import 'package:dcapp/screens/ManageIncome.dart';
-import 'package:dcapp/screens/SplashScreen.dart';
-
+import 'MyFollowers.dart';
 import 'RoleManageMent.dart';
 import 'UserManagement.dart';
-
 import 'Attendance.dart';
 import 'ManageMeeting.dart';
-
 import 'package:image_picker/image_picker.dart';
-
 import 'DiscipleshipStatus.dart';
 import 'ManageTestimonies.dart';
 import 'Members.dart';
@@ -240,6 +236,29 @@ class AppDrawer extends StatelessWidget {
                             return Profile();
                           }))
                         }),
+
+                         CustomListTile(
+                    Icons.people,
+                    'My Followers',
+                    () => {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                           return MyFollowers();
+                          }))
+                        }),
+
+                        CustomListTile(
+                    Icons.school,
+                    'G12 Academy',
+                    () => {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                           return G12Academy();
+                          }))
+                        }),
+
+
+                        
 
                         getAction( Icons.dashboard, 'Dashboard', Dashboard(), 'Y', 'N', 'N', context, 'Can View Dashboard'),
                         getAction( Icons.check_circle, 'Attendance', Attendance(), 'Y', 'Y', 'Y', context, 'Can Manage Attendance'),

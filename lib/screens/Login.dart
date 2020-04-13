@@ -165,319 +165,352 @@ class _LoginState extends State<Login> {
     }
     return Scaffold(
         drawer: AppDrawer(),
-        body: ListView(shrinkWrap: true, physics: ScrollPhysics(), children: <
-            Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.blue.shade900,
-              gradient: LinearGradient(
-                begin: Alignment.center,
-                end: Alignment.bottomCenter,
-                colors: [Colors.white, Colors.blue.shade900],
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: ListView(
+            shrinkWrap: true, physics: ScrollPhysics(), children: <
+              Widget>[
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.blue.shade900,
+                gradient: LinearGradient(
+                  begin: Alignment.center,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.white, Colors.blue.shade900],
+                ),
               ),
-            ),
-            height: MediaQuery.of(context).size.height,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width /
-                                          7)),
-                              Image(
-                                  image: AssetImage("assets/domcitylogo2.jpg"),
-                                  width: MediaQuery.of(context).size.width / 7,
-                                  height:
-                                      MediaQuery.of(context).size.width / 6),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.only(top: 25),
-                                child: new Text(
-                                  'Dominion City',
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width /
-                                              11,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'OpenSans',
-                                      color: Colors.indigo),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                height: 30.0,
-                                child: new Text(
-                                  '...raising leaders that transforms society',
-                                  style: TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.indigo),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
+              height: MediaQuery.of(context).size.height,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: MediaQuery.of(context).size.width /
+                                            7)),
+                                Image(
+                                    image: AssetImage("assets/domcitylogo2.jpg"),
+                                    width: MediaQuery.of(context).size.width / 7,
+                                    height:
+                                        MediaQuery.of(context).size.width / 6),
+                              ],
+                            ),
+                          ],
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 10.0),
-                  Container(
-                      padding:
-                          EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Username or Email',
-                            style: kLabelStyle,
-                          ),
-                          SizedBox(height: 10.0),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            decoration: kBoxDecorationStyle,
-                            height: 50.0,
-                            child: TextFormField(
-                              validator: (value) {
-                                final bool isValid =
-                                    EmailValidator.validate(value);
-                                if (!isValid) {
-                                  return "Enter a valid Email";
-                                }
-                                return null;
-                              },
-                              controller: usernameController,
-                              keyboardType: TextInputType.emailAddress,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'OpenSans',
-                              ),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 14.0),
-                                prefixIcon: Icon(
-                                  Icons.email,
-                                  color: Colors.blue.shade900,
+                        Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(top: 25),
+                                  child: new Text(
+                                    'Dominion City',
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                13,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'OpenSans',
+                                        color: Colors.indigo),
+                                  ),
                                 ),
-                                hintText: 'Enter your Email',
-                                hintStyle: kHintTextStyle,
-                              ),
+                              ],
                             ),
-                          ),
-                        ],
-                      )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                      padding:
-                          EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Password',
-                            style: kLabelStyle,
-                          ),
-                          SizedBox(height: 10.0),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            decoration: kBoxDecorationStyle,
-                            height: 50.0,
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return "Please Enter Password";
-                                }
-                                return null;
-                              },
-                              keyboardType: TextInputType.emailAddress,
-                              controller: passwordController,
-                              obscureText: true,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'OpenSans',
-                              ),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 14.0),
-                                prefixIcon: Icon(
-                                  Icons.lock,
-                                  color: Colors.blue.shade900,
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  height: 30.0,
+                                  child: new Text(
+                                    '...raising leaders that transform society',
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.indigo),
+                                  ),
                                 ),
-                                hintText: 'Enter Password',
-                                hintStyle: kHintTextStyle,
-                              ),
+                              ],
                             ),
-                          ),
-                        ],
-                      )),
-                  SizedBox(height: 3.0),
-                  Container(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 20,
-                        left: MediaQuery.of(context).size.width / 2,
-                        right: 30.0),
-                    child: RaisedButton(
-                      color: Colors.white,
-                      onPressed: () {_showDialog();},
-                      child: InkWell(
-                        child: Text(
-                          'Resend Credentials',
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Sign In',
                           style: TextStyle(
-                            fontSize:12,
-                            color: Colors.blue,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 10.0),
+                    Container(
+                        padding:
+                            EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Username or Email',
+                              style: kLabelStyle,
+                            ),
+                            SizedBox(height: 10.0),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              decoration: kBoxDecorationStyle,
+                              height: 50.0,
+                              child: TextFormField(
+                                validator: (value) {
+                                  final bool isValid =
+                                      EmailValidator.validate(value);
+                                  if (!isValid) {
+                                    return "Enter a valid Email";
+                                  }
+                                  return null;
+                                },
+                                controller: usernameController,
+                                keyboardType: TextInputType.emailAddress,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'OpenSans',
+                                ),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(top: 14.0),
+                                  prefixIcon: Icon(
+                                    Icons.email,
+                                    color: Colors.blue.shade900,
+                                  ),
+                                  hintText: 'Enter your Email',
+                                  hintStyle: kHintTextStyle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                        padding:
+                            EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Password',
+                              style: kLabelStyle,
+                            ),
+                            SizedBox(height: 10.0),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              decoration: kBoxDecorationStyle,
+                              height: 50.0,
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please Enter Password";
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.emailAddress,
+                                controller: passwordController,
+                                obscureText: true,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'OpenSans',
+                                ),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(top: 14.0),
+                                  prefixIcon: Icon(
+                                    Icons.lock,
+                                    color: Colors.blue.shade900,
+                                  ),
+                                  hintText: 'Enter Password',
+                                  hintStyle: kHintTextStyle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                    SizedBox(height: 3.0),
+                    Container(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 20,
+                          left: MediaQuery.of(context).size.width / 2,
+                          right: 30.0),
+                      child: FlatButton(
+                        color: Colors.white,
+                        onPressed: () {_showDialog();},
+                        child: InkWell(
+                          child: Text(
+                            'Resend Credentials',
+                            style: TextStyle(
+                              fontSize:12,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      width: double.infinity,
+                      child: RaisedButton(
+                        elevation: 5.0,
+                        onPressed: () async {
+                          bool res = await checkconnectivity();
+                          if (!res) {
+                            dialog(
+                                "Internet Required, Check your Network Connection");
+                            return;
+                          }
+                          if (_formKey.currentState.validate()) {
+                            //Authenticate Login from Server
+                            new Future.delayed(Duration.zero, () {
+                              loader('Authenticating....');
+
+                              ProfileService.authenticate(usernameController.text,
+                                      passwordController.text)
+                                  .then((profileFromServer) {
+                                setState(() {
+                                  global.profile = profileFromServer;
+                                  if (global.profile.status == "Success") {
+                                    SharedPreferences.getInstance().then((ss) {
+                                      ss.setString(
+                                          'Username', usernameController.text);
+                                      ss.setString(
+                                          "Password", passwordController.text);
+                                    });
+
+                                    RoleActionService.getRolesMemberbyMemberId(
+                                            profileFromServer.member.memberId)
+                                        .then((roleFromServer) {
+                                      setState(() {
+                                        global.roles = roleFromServer.roles;
+                                      });
+
+                                      BranchHeadService.checkifBranchHead(
+                                              profileFromServer.member.memberId)
+                                          .then((response) {
+                                        global.checkifbranchhead = response;
+                                      });
+                                      ZoneHeadService.checkifzone(
+                                              profileFromServer.member.memberId)
+                                          .then((response) {
+                                        global.checkifzonehead = response;
+                                      });
+                                      DepartmentHeadService.checkifdepthead(
+                                              profileFromServer.member.memberId)
+                                          .then((response) {
+                                        global.checkifdepthhead = response.status;
+                                        global.departmentheadDept =
+                                            response.department;
+                                      });
+                                    });
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return Home();
+                                    }));
+                                  } else {
+                                    dialog("Invalid Login Credentials");
+                                    Navigator.pop(context);
+                                  }
+                                });
+                              });
+                            });
+                          }
+                        },
+                        padding: EdgeInsets.all(15.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        color: Colors.white,
+                        child: Text(
+                          'LOGIN',
+                          style: TextStyle(
+                            color: Color(0xFF527DAA),
+                            letterSpacing: 1.5,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'OpenSans',
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    width: double.infinity,
-                    child: RaisedButton(
-                      elevation: 5.0,
-                      onPressed: () async {
-                        bool res = await checkconnectivity();
-                        if (!res) {
-                          dialog(
-                              "Internet Required, Check your Network Connection");
-                          return;
-                        }
-                        if (_formKey.currentState.validate()) {
-                          //Authenticate Login from Server
-                          new Future.delayed(Duration.zero, () {
-                            loader('Authenticating....');
-
-                            ProfileService.authenticate(usernameController.text,
-                                    passwordController.text)
-                                .then((profileFromServer) {
-                              setState(() {
-                                global.profile = profileFromServer;
-                                if (global.profile.status == "Success") {
-                                  SharedPreferences.getInstance().then((ss) {
-                                    ss.setString(
-                                        'Username', usernameController.text);
-                                    ss.setString(
-                                        "Password", passwordController.text);
-                                  });
-
-                                  RoleActionService.getRolesMemberbyMemberId(
-                                          profileFromServer.member.memberId)
-                                      .then((roleFromServer) {
-                                    setState(() {
-                                      global.roles = roleFromServer.roles;
-                                    });
-
-                                    BranchHeadService.checkifBranchHead(
-                                            profileFromServer.member.memberId)
-                                        .then((response) {
-                                      global.checkifbranchhead = response;
-                                    });
-                                    ZoneHeadService.checkifzone(
-                                            profileFromServer.member.memberId)
-                                        .then((response) {
-                                      global.checkifzonehead = response;
-                                    });
-                                    DepartmentHeadService.checkifdepthead(
-                                            profileFromServer.member.memberId)
-                                        .then((response) {
-                                      global.checkifdepthhead = response.status;
-                                      global.departmentheadDept =
-                                          response.department;
-                                    });
-                                  });
-                                  Navigator.pushReplacement(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return Home();
-                                  }));
-                                } else {
-                                  dialog("Invalid Login Credentials");
-                                  Navigator.pop(context);
-                                }
-                              });
-                            });
-                          });
-                        }
-                      },
-                      padding: EdgeInsets.all(15.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      color: Colors.white,
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                          color: Color(0xFF527DAA),
-                          letterSpacing: 1.5,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        ),
-                      ),
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Don't have an account?",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'OpenSans',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'OpenSans',
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return SignUp();
-                          }));
-                        },
-                        child: Text(
-                          "SIGN UP",
+                        SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return SignUp();
+                            }));
+                          },
+                          child: Text(
+                            "SIGN UP",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Can't Sign in?",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'OpenSans',
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "CONTACT US",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -485,42 +518,14 @@ class _LoginState extends State<Login> {
                             fontFamily: 'OpenSans',
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Can't Sign in?",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'OpenSans',
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "CONTACT US",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ]));
+          ]),
+        ));
   }
 
   _showDialog() {

@@ -283,78 +283,81 @@ UserService.updateUserPosition(id, position).then((userfromServer){
                           padding: EdgeInsets.all(10.0),
                           child: Row(
                             children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 18.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                              Container(
+                                width: 250,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 18.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Row(
+                                                children: <Widget>[
+                                                  Column(
+                                                    children: <Widget>[
+                                                      Text(
+                                                        filtereduser[index]
+                                                                .member
+                                                                .firstName +
+                                                            " " +
+                                                            filtereduser[index]
+                                                                .member
+                                                                .surName,
+                                                        style: TextStyle(
+                                                            fontSize: 18.0,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily:
+                                                                'Monseratti'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 10),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 2),
+                                    Row(
                                       children: <Widget>[
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Column(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      filtereduser[index]
-                                                              .member
-                                                              .firstName +
-                                                          " " +
-                                                          filtereduser[index]
-                                                              .member
-                                                              .surName,
-                                                      style: TextStyle(
-                                                          fontSize: 18.0,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily:
-                                                              'Monseratti'),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 10),
-                                          ],
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 15.0),
+                                          child:
+                                              Text(filtereduser[index].userName),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(height: 2),
-                                  Row(
-                                    children: <Widget>[
+                                    SizedBox(height: 10),
+                                    Row(children: <Widget>[
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 15.0),
-                                        child:
-                                            Text(filtereduser[index].userName),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(children: <Widget>[
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 15.0),
-                                      child: Text(
-                                        "(" +
-                                            filtereduser[index].position +
-                                            ")",
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    )
-                                  ])
-                                ],
+                                        child: Text(
+                                          "(" +
+                                              filtereduser[index].position +
+                                              ")",
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      )
+                                    ])
+                                  ],
+                                ),
                               ),
                               Spacer(),
                               Column(children: <Widget>[
