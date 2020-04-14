@@ -73,12 +73,12 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     new Future.delayed(Duration.zero, () async {
-      ProfileService.authenticate(_email, _password).then((profileFromServer) {
+    var profileFromServer= await  ProfileService.authenticate(_email, _password);
         global.profile = profileFromServer;
         if (global.profile.status == "Success") {
-          RoleActionService.getRolesMemberbyMemberId(
-                  profileFromServer.member.memberId)
-              .then((roleFromServer) {
+         var roleFromServer = await RoleActionService.getRolesMemberbyMemberId(
+                  profileFromServer.member.memberId);
+              
             global.roles = roleFromServer.roles;
 
             BranchHeadService.checkifBranchHead(
@@ -96,7 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
               global.checkifdepthhead = response.status;
               global.departmentheadDept = response.department;
             });
-          });
+          
 
           BranchService.getBranches().then((branchesFromServer) {
             global.branches = branchesFromServer;
@@ -126,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen> {
           dialog("Authentication Error");
         }
       });
-    });
+    
   }
 
   @override
