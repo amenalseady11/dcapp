@@ -164,14 +164,11 @@ class _LoginState extends State<Login> {
       detailList = List<Details>();
     }
     return Scaffold(
-        drawer: AppDrawer(),
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: ListView(
-            shrinkWrap: true, physics: ScrollPhysics(), children: <
-              Widget>[
-            Container(
+          child: Center(
+            child: Container(
               decoration: BoxDecoration(
                 color: Colors.blue.shade900,
                 gradient: LinearGradient(
@@ -185,62 +182,65 @@ class _LoginState extends State<Login> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left: MediaQuery.of(context).size.width /
-                                            7)),
-                                Image(
-                                    image: AssetImage("assets/domcitylogo2.jpg"),
-                                    width: MediaQuery.of(context).size.width / 7,
-                                    height:
-                                        MediaQuery.of(context).size.width / 6),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  padding: EdgeInsets.only(top: 25),
-                                  child: new Text(
-                                    'Dominion City',
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width /
-                                                13,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'OpenSans',
-                                        color: Colors.indigo),
+                    Padding(
+                      padding: const EdgeInsets.only(top:20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                          left: MediaQuery.of(context).size.width /
+                                              7)),
+                                  Image(
+                                      image: AssetImage("assets/domcitylogo2.jpg"),
+                                      width: MediaQuery.of(context).size.width / 7,
+                                      height:
+                                          MediaQuery.of(context).size.width / 6),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    padding: EdgeInsets.only(top: 25),
+                                    child: new Text(
+                                      'Dominion City',
+                                      style: TextStyle(
+                                          fontSize:
+                                              MediaQuery.of(context).size.width /
+                                                  13,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'OpenSans',
+                                          color: Colors.indigo),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  height: 30.0,
-                                  child: new Text(
-                                    '...raising leaders that transform society',
-                                    style: TextStyle(
-                                        fontSize: 9,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.indigo),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    height: 30.0,
+                                    child: new Text(
+                                      '...raising leaders that transform society',
+                                      style: TextStyle(
+                                          fontSize: 9,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.indigo),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -524,7 +524,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
-          ]),
+          ),
         ));
   }
 
@@ -594,16 +594,5 @@ class _LoginState extends State<Login> {
     );
   }
 
-//void _delete (BuildContext context, Details  details) async{
-
-  //  int result = await databaseHelper.deleteDetails(details.id);
-  //if(result !=0){
-  //_showSnackbar(context, 'Contact Deleted');
-  //}
-//}
-
-//void _showSnackbar(BuildContext context, String message){
-  //  final snackbar = SnackBar(content: Text(message),);
-  //Scaffold.of(context).showSnackBar(snackbar);
 
 }
