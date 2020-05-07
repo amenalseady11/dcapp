@@ -62,7 +62,7 @@ class _ManageExpenditureState extends State<ManageExpenditure> {
                           Container(
                             height: 30.0,
                             child: new Text(
-                              '...raising leaders that transforms society',
+                              '...raising leaders that transform society',
                               style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,

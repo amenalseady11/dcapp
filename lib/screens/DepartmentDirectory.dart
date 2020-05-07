@@ -151,7 +151,7 @@ var filteredDeptDirectory = List();
                       Container(
                         height: 100.0,
                         child: new Text(
-                          '...raising leaders that transforms society',
+                          '...raising leaders that transform society',
                           style: TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.bold,

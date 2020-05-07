@@ -165,6 +165,7 @@ class _LoginState extends State<Login> {
     }
     return Scaffold(
         body: Container(
+          
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: ListView(shrinkWrap: true, physics: ScrollPhysics(), children: <
@@ -385,30 +386,45 @@ class _LoginState extends State<Login> {
                         ],)
                       ]),
 
-
-                        Spacer(),
-                      Column(children:<Widget>[
-                        Container(
-                          width: 150,
-                    child: FlatButton(
-                      color: Colors.white,
-                      onPressed: () {
-                        _showDialog();
-                      },
-                      child: InkWell(
-                        child: Text(
-                          'Resend Credentials',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans',
-                          ),
-                        ),
-                      ),
+                   Spacer(),
+                      
+                      Container(
+                        padding: EdgeInsets.only(right:30, top: 10),
+                        child: Column(
+                          children:<Widget>[
+                             Row(children: <Widget>[
+                                 Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 16,
+                      fontFamily: 'OpenSans',
                     ),
                   ),
-                      ])
+                             ],),
+
+                          Row(
+                            children: <Widget>[
+                              GestureDetector(
+                                  onTap: () {
+                                        _showDialog();
+                                  },
+                                  child: InkWell(
+                                        child: Text(
+                                          'Resend Credentials',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.blue,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'OpenSans',
+                                          ),
+                                        ),
+                                  ),
+                              ),
+                            ],
+                          ),
+                        ]),
+                      )
                     
                   ]),
                 ),

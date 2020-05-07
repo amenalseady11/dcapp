@@ -231,7 +231,7 @@ class _DiscipleshipStatus extends State<DiscipleshipStatus> {
                         Container(
                           height: 100.0,
                           child: new Text(
-                            '...raising leaders that transforms society',
+                            '...raising leaders that transform society',
                             style: TextStyle(
                                 fontSize: 8,
                                 fontWeight: FontWeight.bold,
@@ -400,7 +400,8 @@ class _DiscipleshipStatus extends State<DiscipleshipStatus> {
                                 ],
                               ),
                               Spacer(),
-                              Column(children: <Widget>[
+                              Column(
+                                children: <Widget>[
                                 new IconButton(
                                   padding: EdgeInsets.only(left: 0),
                                   icon: Icon(

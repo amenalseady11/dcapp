@@ -168,7 +168,7 @@ List<testimonyClass.Testimony> filteredTestimony = new List<testimonyClass.Testi
                       Container(
                         height: 100.0,
                         child: new Text(
-                          '...raising leaders that transforms society',
+                          '...raising leaders that transform society',
                           style: TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.bold,
@@ -303,9 +303,12 @@ List<testimonyClass.Testimony> filteredTestimony = new List<testimonyClass.Testi
                                             SizedBox(height: 10),
 
                                            Row(children:<Widget>[
-                                             Text(filteredTestimony[index].testimony,style: TextStyle(fontSize: 14.0,
-                                                        fontWeight: FontWeight.bold,
-                                                       fontFamily: 'Monseratti')),
+                                             Container(
+                                               width: 200,
+                                               child: Text(filteredTestimony[index].testimony,style: TextStyle(fontSize: 14.0,
+                                                          fontWeight: FontWeight.bold,
+                                                         fontFamily: 'Monseratti')),
+                                             ),
                                            ])
                                          ],
                                        ),

@@ -1,6 +1,11 @@
+import 'package:dcapp/services/FollowerServ.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:progress_indicators/progress_indicators.dart';
+import 'package:dcapp/globals.dart' as global;
+import 'package:dcapp/classes/FollowersClass.dart' as followers;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
-
 
 class MyFollowers extends StatefulWidget {
   @override
@@ -8,12 +13,42 @@ class MyFollowers extends StatefulWidget {
 }
 
 class _MyFollowersState extends State<MyFollowers> {
+  List<followers.Myfollower> _follow = new List<followers.Myfollower>();
+ List<followers.Myfollower> filteredFollowers = new List<followers.Myfollower>();
   
+  Future<bool> loader(String str) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+              title: ScalingText(str),
+            ));
+  }
+
    
 @override
  void initState() {
     // TODO: implement initState
     super.initState();
+    setState(() {
+        new Future.delayed(Duration.zero, () {
+        loader('My Followers ...');
+
+        GetMyFollowerService.getFollower(global.profile.member.memberId).then((followerFromServer) {
+          
+          setState(() {
+            _follow = followerFromServer.myfollowers;
+            _follow.removeWhere((item) => item.firstName == null);
+            _follow.removeWhere((item) => item.lastName == null);
+            _follow.removeWhere((item) => item.phone == null);
+            filteredFollowers = _follow;
+            
+
+            Navigator.pop(context);
+          });
+        });
+      });
+    });
     }
 
 
@@ -61,7 +96,7 @@ class _MyFollowersState extends State<MyFollowers> {
                       Container(
                         height: 100.0,
                         child: new Text(
-                          '...raising leaders that transforms society',
+                          '...raising leaders that transform society',
                           style: TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.bold,
@@ -115,13 +150,19 @@ class _MyFollowersState extends State<MyFollowers> {
                      ],
                    ),
                   Column(children: <Widget>[
-                    IconButton(icon: Icon(Icons.share), color: Colors.white, iconSize: 18,  onPressed: () {
-            },)
+                    IconButton(icon: Icon(Icons.share), color: Colors.white, iconSize: 18, tooltip: "Share",
+                     onPressed: () {
+                       Share.share("Click this link below to join my G12 group \n\n"+"www.dominioncityg12.com/parentId="+global.profile.member.memberId.toString()+ "\n\n For with the heart man believeth unto righteousness; and with the mouth confession is made unto salvation. 11For the scripture saith, Whosoever believeth on him shall not be ashamed. For there is no difference between the Jew and the Greek: for the same Lord over all is rich unto all that call upon him.For whosoever shall call upon the name of the Lord shall be saved. \nRomans 5: 12-14");
+                     },)
                     ],),
-                    Column(children: <Widget>[
-                    IconButton(icon: Icon(Icons.content_copy), color: Colors.white, iconSize: 18,  onPressed: () {
-            },)
-                    ],)
+                    GestureDetector(
+                      child: Column(children: <Widget>[
+                      IconButton(icon: Icon(Icons.content_copy), color: Colors.white, iconSize: 18, tooltip: "Copied",  onPressed: () {
+                      Clipboard.setData(new ClipboardData(text: "Click this link below to join my G12 group \n\n"+"www.dominioncityg12.com/parentId="+global.profile.member.memberId.toString()+ "\n\n For with the heart man believeth unto righteousness; and with the mouth confession is made unto salvation. 11For the scripture saith, Whosoever believeth on him shall not be ashamed. For there is no difference between the Jew and the Greek: for the same Lord over all is rich unto all that call upon him.For whosoever shall call upon the name of the Lord shall be saved. \nRomans 5: 12-14"));
+
+                               },)
+                      ],),
+                    )
                     ],
                 ),
                   ],
@@ -141,7 +182,7 @@ class _MyFollowersState extends State<MyFollowers> {
            Expanded(
               child: ListView.builder(
                   padding: EdgeInsets.all(10.0),
-                  itemCount: 12,
+                  itemCount: filteredFollowers.length,
                   itemBuilder: (BuildContext context, int index){
                     return InkWell(
                       splashColor: Colors.blue.shade900,
@@ -167,7 +208,7 @@ class _MyFollowersState extends State<MyFollowers> {
                                     children: <Widget>[
                                       Column(
                                         children: <Widget>[
-                                          Text("Shadrach Ogombo" , 
+                                          Text(filteredFollowers[index].firstName + " " + filteredFollowers[index].lastName , 
                                           style: TextStyle(
                                                fontSize: 20.0,
                                               
@@ -188,14 +229,14 @@ class _MyFollowersState extends State<MyFollowers> {
                                           new IconButton(
                               
                               padding: EdgeInsets.only(left:0),
-                              icon: Icon(Icons.phone,color: Colors.red, size: 20,),
-                               onPressed: (){}
+                              icon: Icon(Icons.phone,color: Colors.green, size: 25,),
+                              onPressed: ()=> launch("tel:${filteredFollowers[index].phone.toString()}"),
                               ),
                                       ]),
                                       SizedBox(width:10),
                                    Column(
                                      children: <Widget>[
-                                       Text("08031020304 " , 
+                                       Text(filteredFollowers[index].phone , 
                                               style: TextStyle(
                                                    fontSize: 14.0,
                                                   color: Colors.grey,
@@ -213,7 +254,7 @@ class _MyFollowersState extends State<MyFollowers> {
                           
                         ),
                       )
-                      ,
+                      , 
                     );
 
                   }),

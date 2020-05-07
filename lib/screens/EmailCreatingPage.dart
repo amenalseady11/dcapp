@@ -159,7 +159,7 @@ Future<bool> dialog(str){
                                  
                                   height: 100.0,
                                   
-                                  child: new Text('...raising leaders that transforms society',style:TextStyle(fontSize: 8, fontWeight: FontWeight.bold,color: Colors.indigo),),
+                                  child: new Text('...raising leaders that transform society',style:TextStyle(fontSize: 8, fontWeight: FontWeight.bold,color: Colors.indigo),),
                                 ),
                               ],
                             ),

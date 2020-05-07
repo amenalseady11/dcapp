@@ -62,17 +62,7 @@ Future<NotusDocument> _loadDocument() async {
         await DevotionalService.postDevotional(devotionalTitleController.text, devotional, DateTime.now(), "Active", 0, contents);
         global.rawText="";
       }
-  
-
-
-
-   
-    // final file = File(Directory.systemTemp.path + "/quick_start.json");
-    // // And show a snack bar on success.
-    // file.writeAsString(contents).then((_) {
-    //   Scaffold.of(context).showSnackBar(SnackBar(content: Text("Saved.")));
-    // });
-  }
+ }
 
 @override
   void initState() {
@@ -201,7 +191,7 @@ Future<bool> dialog(str){
                       Container(
                         height: 100.0,
                         child: new Text(
-                          '...raising leaders that transforms society',
+                          '...raising leaders that transform society',
                           style: TextStyle(
                               fontSize: 8,
                               fontWeight: FontWeight.bold,
